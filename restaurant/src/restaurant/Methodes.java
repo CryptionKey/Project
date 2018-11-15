@@ -9,7 +9,7 @@ public class Methodes {
     Logger logger = LoggerFactory.getLogger("player");
     Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
 
-    void affichage_choix(){
+    public void affichage_choix(){
         logger.info("","\to: Afficher la liste des opérations disponibles.\n" );
         logger.info("","\tp: Afficher la liste des produits à la vente.\n");
         logger.info("","\ta: Ajouter un produit à la vente.\n");
@@ -24,12 +24,12 @@ public class Methodes {
         logger.info("","\tq: Quitter le restaurant.\n");
     }
 
-    void enregistrer(Clients clients, Products products){
+    public void enregistrer(Clients clients, Products products){
         logger.info("","Entrez le nom du client que vous voulez facturer:");
         String nom = scan.next();  int compteur = 0, index = 0;
         boolean test_nom = false; //faux par défault
 
-        for (Note note_courante : clients.noteList) {//si les chaînes sont différentes:
+        for (Note note_courante : clients.getNoteList()) {//si les chaînes sont différentes:
             if(note_courante.getNom().toLowerCase().compareTo(nom.toLowerCase())==0){
                 test_nom=true;
                 index=compteur;
@@ -43,7 +43,7 @@ public class Methodes {
             Aliment aliment_demande = null;
 
             test_nom = false; //faux par défautl
-            for (Aliment aliment_courant : products.productList) {//si les chaînes sont pareilles:
+            for (Aliment aliment_courant : products.getProductList()) {//si les chaînes sont pareilles:
                 if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){
                     test_nom=true;
                     aliment_demande = aliment_courant;
@@ -56,13 +56,16 @@ public class Methodes {
                 Aliment aliment = new Aliment(aliment_demande.getNom(), quantite, aliment_demande.getPrix());
                 if(quantite>aliment_demande.getQuantite()){ logger.info("", "Il n'y en a pas assez en stock\n"); }
                 else{
-                    clients.noteList.get(index).productList.add(aliment);
-                    logger.info(""," "+clients.noteList.get(index));
+                    clients.getNoteList().get(index).getProductList().add(aliment);
+                    logger.info(""," "+clients.getNoteList().get(index));
                     if(aliment_demande.getNom() != "café"){ aliment_demande.setQuantite(aliment_demande.getQuantite()-quantite); }
                 }
             } else{logger.info("","Ce produit n'est pas proposé à la vente.\n");}
         } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note:\n"); }
     }
+
+
+
 }
 
 

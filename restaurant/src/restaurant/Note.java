@@ -7,7 +7,7 @@ import logger.LoggerFactory;
 public class Note {
 
     private String nom;
-    public final LinkedList<Aliment> productList = new LinkedList<Aliment>();
+    private final LinkedList<Aliment> productList = new LinkedList<Aliment>();
     Logger logger = LoggerFactory.getLogger("player");
 
     //constructor
@@ -15,6 +15,8 @@ public class Note {
         this.nom = nom.toLowerCase();
     }
 
+
+    public LinkedList<Aliment> getProductList() {return productList;}
 
     //Pour récupérer le nom
     public String getNom(){

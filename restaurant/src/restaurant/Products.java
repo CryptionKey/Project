@@ -6,13 +6,16 @@ import logger.LoggerFactory;
 
 public class Products {
 
-    public final LinkedList<Aliment> productList = new LinkedList<Aliment>();
+    private final LinkedList<Aliment> productList = new LinkedList<Aliment>();
     Logger logger = LoggerFactory.getLogger("player");
-    public Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
+
 
     public String toString() {
         return productList.toString();
     }
+
+    public LinkedList<Aliment> getProductList() { return productList; }
 
     //Afficher la liste des aliments
     public void afficherListe(){
@@ -22,15 +25,17 @@ public class Products {
     }
 
     //Ajouter un aliment à la vente
-    public void add (Aliment aliment){
-       productList.add(aliment);
+    private void add (Aliment aliment){
+        productList.add(aliment);
     }
+
 
     //Créer puis ajouter un aliment à la vente
     public void create_add(String nom, int quantite, double prix){
         Aliment aliment = new Aliment(nom, quantite, prix);
         this.add(aliment);
     }
+
 
     //Initialiser les produits mis en vente
     public void init () {
@@ -41,6 +46,7 @@ public class Products {
         create_add("café", (int)inf, 2);
     }
 
+
     public boolean verification_aliment_existant(String nom){
         boolean verif = false; /*l'aliment n'existe pas par défault*/
         for (Aliment aliment_courant : productList) {
@@ -49,6 +55,7 @@ public class Products {
         }
         return verif;
     }
+
 
     public void ajouter_produit(){
         logger.info("","\nAjoutez un produit à la vente\nEntrez le nom du produit:\n");

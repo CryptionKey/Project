@@ -6,8 +6,8 @@ import logger.LoggerFactory;
 
 public class Methodes {
 
-    Logger logger = LoggerFactory.getLogger("player");
-    Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
+    private Logger logger = LoggerFactory.getLogger("player");
+    private Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
 
     public void affichage_choix(){
         logger.info("","\to: Afficher la liste des opérations disponibles.\n" );
@@ -58,7 +58,7 @@ public class Methodes {
                 else{
                     clients.getNoteList().get(index).getProductList().add(aliment);
                     logger.info(""," "+clients.getNoteList().get(index));
-                    if(aliment_demande.getNom() != "café"){ aliment_demande.setQuantite(aliment_demande.getQuantite()-quantite); }
+                    if(!"café".equals(aliment_demande.getNom())){ aliment_demande.setQuantite(aliment_demande.getQuantite()-quantite); }
                 }
             } else{logger.info("","Ce produit n'est pas proposé à la vente.\n");}
         } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note:\n"); }

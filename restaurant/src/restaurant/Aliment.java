@@ -1,7 +1,5 @@
 package restaurant;
 
-import logger.Logger;
-
 public class Aliment {
 
     private String nom;
@@ -13,13 +11,15 @@ public class Aliment {
     public String toString(){
         if(quantite!=(int)inf){ return ""+quantite+" "+nom+"(s) coûtant chacun "+prix+" €"; }
         else{ return "\u221E "+nom+"(s) coûtant chacun "+prix+" €"; }
-}
+    }
+
+
     //getters
     public String getNom(){return nom; }
     public int getQuantite(){ return quantite; }
     public double getPrix(){ return prix; }
 
-    //setters le mal
+    //setters
     public void setNom(String nom) { this.nom = nom; }
     public void setPrix(double prix) { this.prix = prix; }
     public void setQuantite(int quantite) { this.quantite = quantite; }
@@ -40,7 +40,7 @@ public class Aliment {
 
     public boolean verification_aliment_produit(Products products, String nom){
         boolean verif = true; /*vrai par défault */
-        for (Aliment aliment_courant : products.productList) {
+        for (Aliment aliment_courant : products.getProductList()) {
             if(aliment_courant.getNom().toLowerCase().compareTo(nom.toLowerCase())==0){
                 verif = false;} //si les chaînes sont identiques:
         }

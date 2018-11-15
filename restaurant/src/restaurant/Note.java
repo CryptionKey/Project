@@ -1,6 +1,5 @@
 package restaurant;
 
-import java.lang.reflect.Array;
 import java.util.LinkedList;
 import logger.Logger;
 import logger.LoggerFactory;
@@ -34,7 +33,6 @@ public class Note {
             logger.info("", "\t"+aliment+"\n");
         }
     }
-
 
     //Ajouter un aliment à la note
     public void add (Aliment aliment){

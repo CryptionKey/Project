@@ -19,7 +19,7 @@ public class Aliment {
     public int getQuantite(){ return quantite; }
     public double getPrix(){ return prix; }
 
-    //setters
+    //setters le mal
     public void setNom(String nom) { this.nom = nom; }
     public void setPrix(double prix) { this.prix = prix; }
     public void setQuantite(int quantite) { this.quantite = quantite; }

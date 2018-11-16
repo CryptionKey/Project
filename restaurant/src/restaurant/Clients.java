@@ -41,21 +41,52 @@ public class Clients {
         return verif;
     }
 
-    public Note ouvrir_note(Clients clients){
-        logger.info("","\nDonnez le nom du client dont vous souhaitez ouvrir la note\n");
-        String nom_1 = scan.next();     int compteur = 0, index=0;      boolean test_nom_1=true; //vrai par défault
-        Note note = null;
-        for (Note note_courante : clients.noteList) {
-            if(note_courante.getNom().toLowerCase().compareTo(nom_1.toLowerCase())==0){  test_nom_1=false; index=compteur; }
+    public int getIndex(String nom_client){
+        int compteur = 0, index=0;
+        for (Note note_courante : noteList) {
+            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
+                index=compteur;} //si les chaînes sont identiques, le client existe
             compteur++;
         }
-        if(test_nom_1) {  note = new Note(nom_1); clients.add(note);}
+        return index;
+    }
+
+    public Note ouvrir_note(Clients clients){
+        logger.info("","\nDonnez le nom du client dont vous souhaitez ouvrir la note\n");
+        String nom_client = scan.next();
+        Note note = null;
+        if(!verification_client_existant(nom_client)) {
+            note = new Note(nom_client);
+            clients.add(note);
+        }
         else {
             logger.info("", "Voici la note demandée:\n");
-            logger.info("",""+clients.noteList.get(index));
+            logger.info("",""+clients.noteList.get(getIndex(nom_client)));
         }
         return note;
     }
 
+    public void enregistrer(Clients clients, Products products){
+        logger.info("","Entrez le nom du client que vous voulez facturer:");
+        String nom_client = scan.next();
 
+        if(verification_client_existant(nom_client)) {
+            logger.info("","Entrez le nom de l'article que vous souhaitez facturer:");
+            String nom_aliment = scan.next();
+
+            if(products.verification_aliment_existant(nom_client)) {
+                logger.info("","\nEntrez la quantité du produit souhaité:\n");
+                int quantite = scan.nextInt();
+                int index_aliment = getIndex(nom_aliment);
+                Aliment aliment = new Aliment(products.getProductList().get(index_aliment).getNom(), quantite, products.getProductList().get(index_aliment).getPrix());
+                Aliment aliment_demande = products.getProductList().get(index_aliment);
+                if(quantite>aliment_demande.getQuantite()){ logger.info("", "Il n'y en a pas assez en stock\n"); }
+                else{
+                    clients.getNoteList().get(getIndex(nom_client)).getProductList().add(aliment);
+                    logger.info(""," "+clients.getNoteList().get(getIndex(nom_client)));
+                    if(!"café".equals(aliment_demande.getNom())){ aliment_demande.setQuantite(aliment_demande.getQuantite()-quantite); }
+                }
+            } else{logger.info("","Ce produit n'est pas proposé à la vente.\n");}
+        } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note:\n"); }
+    }
 }

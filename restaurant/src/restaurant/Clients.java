@@ -61,7 +61,8 @@ public class Clients {
         }
         else {
             logger.info("", "Voici la note demandée:\n");
-            logger.info("",""+clients.noteList.get(getIndexNote(nom_client)));
+            clients.noteList.get(getIndexNote(nom_client)).afficherListe();
+            //logger.info("",""+clients.noteList.get(getIndexNote(nom_client)));
         }
         return note;
     }
@@ -90,4 +91,14 @@ public class Clients {
             } else{logger.info("","Ce produit n'est pas proposé à la vente.\n");}
         } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note:\n"); }
     }
+
+    public void cloturer(Clients clients){
+        logger.info("","Entrez le nom du client dont vous voulez fermez la note:");
+        String nom_client = scan.next();
+        if(verification_client_existant(nom_client)) {
+            int index_note = getIndexNote("nom_client");
+            clients.noteList.get(index_note).facture();
+        } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note:\n"); }
+    }
+
 }

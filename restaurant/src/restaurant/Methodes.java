@@ -24,14 +24,7 @@ public class Methodes {
         logger.info("","\tq: Quitter le restaurant.\n");
     }
 
-
-
-
-
 }
-
-
-
 
  /*   boolean retirer_aliment(Products products, Aliment aliment_demande, int quantite){
 

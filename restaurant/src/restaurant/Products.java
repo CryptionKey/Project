@@ -56,6 +56,15 @@ public class Products {
         return verif;
     }
 
+    public int getIndexAliment(String nom_aliment){
+        int compteur = 0, index=0;
+        for (Aliment aliment_courant : productList) {
+            if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){
+                index=compteur;} //si les chaînes sont identiques, l'aliment existe
+            compteur++;
+        }
+        return index;
+    }
 
     public void ajouter_produit(){
         logger.info("","\nAjoutez un produit à la vente\nEntrez le nom du produit:\n");

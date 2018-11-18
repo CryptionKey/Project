@@ -19,7 +19,7 @@ public class Main {
             case "p": products.afficherListe();  break;
             case "n": clients.ouvrir_note(clients); break;
             case "k": clients.afficherListe();    break;
-            case "e": methodes.enregistrer(clients, products); break;
+            case "e": clients.enregistrer(clients, products); break;
         }
         return bool;
     }

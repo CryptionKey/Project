@@ -41,7 +41,7 @@ public class Clients {
         return verif;
     }
 
-    public int getIndex(String nom_client){
+    public int getIndexNote(String nom_client){
         int compteur = 0, index=0;
         for (Note note_courante : noteList) {
             if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
@@ -61,7 +61,7 @@ public class Clients {
         }
         else {
             logger.info("", "Voici la note demandée:\n");
-            logger.info("",""+clients.noteList.get(getIndex(nom_client)));
+            logger.info("",""+clients.noteList.get(getIndexNote(nom_client)));
         }
         return note;
     }
@@ -74,17 +74,18 @@ public class Clients {
             logger.info("","Entrez le nom de l'article que vous souhaitez facturer:");
             String nom_aliment = scan.next();
 
-            if(products.verification_aliment_existant(nom_client)) {
+            if(products.verification_aliment_existant(nom_aliment)) {
                 logger.info("","\nEntrez la quantité du produit souhaité:\n");
                 int quantite = scan.nextInt();
-                int index_aliment = getIndex(nom_aliment);
-                Aliment aliment = new Aliment(products.getProductList().get(index_aliment).getNom(), quantite, products.getProductList().get(index_aliment).getPrix());
+                int index_aliment = products.getIndexAliment(nom_aliment);
                 Aliment aliment_demande = products.getProductList().get(index_aliment);
                 if(quantite>aliment_demande.getQuantite()){ logger.info("", "Il n'y en a pas assez en stock\n"); }
                 else{
-                    clients.getNoteList().get(getIndex(nom_client)).getProductList().add(aliment);
-                    logger.info(""," "+clients.getNoteList().get(getIndex(nom_client)));
-                    if(!"café".equals(aliment_demande.getNom())){ aliment_demande.setQuantite(aliment_demande.getQuantite()-quantite); }
+                    Aliment aliment = new Aliment(nom_aliment.toLowerCase(), quantite, products.getProductList().get(index_aliment).getPrix());
+                    clients.getNoteList().get(getIndexNote(nom_client)).getProductList().add(aliment);
+                    logger.info(""," "+clients.getNoteList().get(getIndexNote(nom_client)));
+                    if(!"café".equals(aliment_demande.getNom())){ products.getProductList().get(index_aliment).setQuantite(aliment_demande.getQuantite()-quantite);}
+                    //aliment_demande.setQuantite(aliment_demande.getQuantite()-quantite); }
                 }
             } else{logger.info("","Ce produit n'est pas proposé à la vente.\n");}
         } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note:\n"); }

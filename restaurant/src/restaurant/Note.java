@@ -57,14 +57,17 @@ public class Note {
     }
 
     //Afficher les produits enregistrés, total HT, TVA; total TTC
-    public void facture(){
-        logger.info("", "Prix de chaque produit hors-taxe :\n");
+    public void facture(int remise){
+        logger.info("", "\nPrix de chaque produit hors-taxe :\n");
         this.afficherListe();
         double prixHT = prixHT(this.productList);
         logger.info("","Prix total hors-taxe : "+prixHT+"\n");
         double TVA = getTVA(prixHT);
-        logger.info("","TVA :"+TVA+"\n");
-        logger.info("","Prix taxes comprises :"+(TVA + prixHT)+"\n");
+        logger.info("","TVA : "+TVA+"\n");
+        logger.info("","Prix taxes comprises : "+(TVA + prixHT)+"\n");
+        if(remise == 1){
+            logger.info("","Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+"\n");
+        }
     }
 
 }

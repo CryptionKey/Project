@@ -9,7 +9,7 @@ import static restaurant.Main.products;
 public class Clients {
 
     private final LinkedList<Note> noteList = new LinkedList<Note>();
-    Logger logger = LoggerFactory.getLogger("player");
+    Logger logger = LoggerFactory.getLogger("client");
     public Scanner scan = new Scanner(System.in);
 
     //constructeur

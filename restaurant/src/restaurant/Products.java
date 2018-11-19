@@ -7,7 +7,7 @@ import logger.LoggerFactory;
 public class Products {
 
     private final LinkedList<Aliment> productList = new LinkedList<Aliment>();
-    Logger logger = LoggerFactory.getLogger("player");
+    Logger logger = LoggerFactory.getLogger("product");
     private Scanner scan = new Scanner(System.in);
 
 
@@ -73,12 +73,48 @@ public class Products {
 
         if(test_aliment_existant==false) { //si l'aliment n'existe pas
             logger.info("","\nEntrez la quantité du produit:\n");
-            int quantite = scan.nextInt();
+            int quantite = (int)askNextGuess();
             logger.info("","\nEntrez le prix du produit:\n");
-            double prix = scan.nextDouble();
+            double prix = askNextGuess();
             create_add(nom, quantite, prix);
         }
         else{logger.info("", "\nCe produit existe déjà\n");}
+    }
+
+
+ /*   public boolean verif_chiffre(double prix){
+        long choix = 0;
+        boolean bool = false;
+        do {
+            try {
+                choix = scan.nextLong();
+                bool = true;
+            } catch (Exception e) {
+                logger.info("","Veuillez entrer un nombre");
+                break;
+            }
+
+        } while (!bool);
+
+        return bool;
+    }*/
+
+    public double askNextGuess() {
+        Scanner scan = new Scanner(System.in);
+        double choix = 0;
+        boolean bool = false;
+        do {
+            try {
+                choix = scan.nextDouble();
+                bool = true;
+            } catch (Exception e) {
+                System.out.println("Veuillez entrer un nombre!");
+                break;
+            }
+
+        } while (!bool);
+
+        return choix;
     }
 
 }

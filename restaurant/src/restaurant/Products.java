@@ -6,8 +6,8 @@ import logger.LoggerFactory;
 
 public class Products {
 
-    private final LinkedList<Aliment> productList = new LinkedList<Aliment>();
-    Logger logger = LoggerFactory.getLogger("product");
+    private final LinkedList<Aliment> productList = new LinkedList<>();
+    private Logger logger = LoggerFactory.getLogger("product");
     private Scanner scan = new Scanner(System.in);
 
 
@@ -15,10 +15,10 @@ public class Products {
         return productList.toString();
     }
 
-    public LinkedList<Aliment> getProductList() { return productList; }
+    LinkedList<Aliment> getProductList() { return productList; }
 
     //Afficher la liste des aliments
-    public void afficherListe(){
+    void afficherListe(){
         for (Aliment aliment : this.productList) {
             logger.info("", "\t"+aliment+"\n");
         }
@@ -31,14 +31,14 @@ public class Products {
 
 
     //Créer puis ajouter un aliment à la vente
-    public void create_add(String nom, int quantite, double prix){
+    private void create_add(String nom, int quantite, double prix){
         Aliment aliment = new Aliment(nom, quantite, prix);
         this.add(aliment);
     }
 
 
     //Initialiser les produits mis en vente
-    public void init () {
+    void init() {
         double inf = Double.POSITIVE_INFINITY;
         create_add("bagel", 20, 8);
         create_add("burger", 10, 10);
@@ -47,7 +47,7 @@ public class Products {
     }
 
 
-    public boolean verification_aliment_existant(String nom){
+    boolean verification_aliment_existant(String nom){
         boolean verif = false; /*l'aliment n'existe pas par défault*/
         for (Aliment aliment_courant : productList) {
             if(aliment_courant.getNom().toLowerCase().compareTo(nom.toLowerCase())==0){
@@ -56,7 +56,7 @@ public class Products {
         return verif;
     }
 
-    public int getIndexAliment(String nom_aliment){
+    int getIndexAliment(String nom_aliment){
         int compteur = 0, index=0;
         for (Aliment aliment_courant : productList) {
             if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){
@@ -66,57 +66,35 @@ public class Products {
         return index;
     }
 
-    public void ajouter_produit(){
-        logger.info("","\nAjoutez un produit à la vente\nEntrez le nom du produit:\n");
+    void ajouter_produit(){
+        logger.info("","\nAjoutez un produit à la vente\nEntrez le nom du produit: ");
         String nom = scan.next();
         boolean test_aliment_existant = verification_aliment_existant(nom); //aliment.verification(products); /*vrai par défault */
 
-        if(test_aliment_existant==false) { //si l'aliment n'existe pas
-            logger.info("","\nEntrez la quantité du produit:\n");
-            int quantite = (int)askNextGuess();
-            logger.info("","\nEntrez le prix du produit:\n");
-            double prix = askNextGuess();
+        if(!test_aliment_existant) { //si l'aliment n'existe pas
+            logger.info("","Entrez la quantité du produit: ");
+            int quantite = (int)verif_chiffre();
+            logger.info("","Entrez le prix du produit: ");
+            double prix = verif_chiffre();
             create_add(nom, quantite, prix);
         }
         else{logger.info("", "\nCe produit existe déjà\n");}
     }
 
 
- /*   public boolean verif_chiffre(double prix){
-        long choix = 0;
-        boolean bool = false;
-        do {
-            try {
-                choix = scan.nextLong();
-                bool = true;
-            } catch (Exception e) {
-                logger.info("","Veuillez entrer un nombre");
-                break;
-            }
-
-        } while (!bool);
-
-        return bool;
-    }*/
-
-    public double askNextGuess() {
+    private double verif_chiffre() {
         Scanner scan = new Scanner(System.in);
-        double choix = 0;
-        boolean bool = false;
+        double choix = 0 ; String str;
+
         do {
+            str = (scan.nextLine());
             try {
-                choix = scan.nextDouble();
-                bool = true;
+                choix = Integer.parseInt(str);
+                if (choix <= 0)   throw new Exception();
             } catch (Exception e) {
-                System.out.println("Veuillez entrer un nombre!");
-                break;
+                logger.info("","Veuillez entrer un nombre positif! ");
             }
-
-        } while (!bool);
-
+        } while (choix<=0);
         return choix;
     }
-
 }
-
-

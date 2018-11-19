@@ -1,12 +1,12 @@
 package restaurant;
 
-public class Aliment {
+class Aliment {
 
     private String nom;
     private int quantite;
     private double prix;
 
-    double inf = Double.POSITIVE_INFINITY;
+    private double inf = Double.POSITIVE_INFINITY;
 
     public String toString(){
         if(quantite!=(int)inf){ return ""+quantite+" "+nom+"(s) coûtant chacun "+prix+" €"; }
@@ -15,24 +15,16 @@ public class Aliment {
 
 
     //getters
-    public String getNom(){return nom; }
-    public int getQuantite(){ return quantite; }
-    public double getPrix(){ return prix; }
+    String getNom(){return nom; }
+    int getQuantite(){ return quantite; }
+    double getPrix(){ return prix; }
 
-    //setters
-    public void setNom(String nom) { this.nom = nom; }
-    public void setPrix(double prix) { this.prix = prix; }
-    public void setQuantite(int quantite) { this.quantite = quantite; }
 
-/*    public void setAliment(String nom, double prix, int quantite){
-        this.nom = nom;
-        this.prix = prix;
-        this.quantite = quantite;
-    }
-*/
+    void setQuantite(int quantite) { this.quantite = quantite; }
+
 
     //constructor
-    public Aliment (String name, int quantity, double price){
+    Aliment(String name, int quantity, double price){
         this.quantite = quantity;
         this.nom = name;
         this.prix = price;

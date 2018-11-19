@@ -3,15 +3,15 @@ import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
-public class Main {
+class Main {
 
-    static Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
-    static Logger logger = LoggerFactory.getLogger("main");
-    static Clients clients = new Clients();
-    static Methodes methodes = new Methodes();
-    static Products products = new Products();
+    private static Scanner scan = new Scanner(System.in);
+    private static Logger logger = LoggerFactory.getLogger("main");
+    private static Clients clients = new Clients();
+    private static Methodes methodes = new Methodes();
+    private static Products products = new Products();
 
-    public static boolean actions(String choice, boolean bool, Products products){
+    private static boolean actions(String choice, boolean bool, Products products){
         switch (choice) {
             case "q": bool = true; break;
             case "o": methodes.affichage_choix(); break;
@@ -31,8 +31,8 @@ public class Main {
         boolean bool = false;
         products.init();
 
-        while(bool==false) {
-            logger.info("","\nQue voulez-vous faire? [o pour afficher les opérations possibles]\n");
+        while(!bool) {
+            logger.info("","\nQue voulez-vous faire? [o pour afficher les opérations possibles] : ");
             String choice = scan.next();
             bool = actions(choice, bool, products);
         }

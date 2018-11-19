@@ -4,33 +4,31 @@ import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
-import static restaurant.Main.products;
-
 public class Clients {
 
-    private final LinkedList<Note> noteList = new LinkedList<Note>();
-    Logger logger = LoggerFactory.getLogger("client");
-    public Scanner scan = new Scanner(System.in);
+    private final LinkedList<Note> noteList = new LinkedList<>();
+    private Logger logger = LoggerFactory.getLogger("client");
+    private Scanner scan = new Scanner(System.in);
 
     //constructeur
-    public Clients(){ }
+   // public Clients(){ }
 
     public String toString() {return noteList.toString();}
 
-    public LinkedList<Note> getNoteList() { return noteList;  }
+    private LinkedList<Note> getNoteList() { return noteList;  }
 
     //Afficher la liste des notes de client
-    public void afficherListe(){
+    void afficherListe(){
         for (Note note : this.noteList) {
             logger.info("", "\t"+note.getNom()+"\n");
         }
     }
 
     //Ajouter une note à la liste des clients
-    public void add (Note note){noteList.add(note);}
+    private void add (Note note){noteList.add(note);}
 
     //verifier si un client se trouve déjà dans la liste
-    public boolean verification_client_existant(String nom_client){
+    private boolean verification_client_existant(String nom_client){
         boolean verif = false; /*le client n'existe pas par défault*/
         for (Note note_courante : noteList) {
             if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
@@ -39,7 +37,7 @@ public class Clients {
         return verif;
     }
 
-    public int getIndexNote(String nom_client){
+    private int getIndexNote(String nom_client){
         int compteur = 0, index=0;
         for (Note note_courante : noteList) {
             if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
@@ -49,11 +47,11 @@ public class Clients {
         return index;
     }
 
-    public Note ouvrir_note(Clients clients){
+    Note ouvrir_note(Clients clients){
         if(clients.getNoteList().size()!=0){
             logger.info("","Les clients actuellement dans le restaurant sont:\n");
             afficherListe();}
-        logger.info("","\nDonnez le nom du client dont vous souhaitez ouvrir ou créer la note\n");
+        logger.info("","\nDonnez le nom du client dont vous souhaitez ouvrir ou créer la note: ");
         String nom_client = scan.next();
         Note note = null;
         if(!verification_client_existant(nom_client)) {
@@ -71,7 +69,7 @@ public class Clients {
         return note;
     }
 
-    public void enregistrer(Clients clients, Products products){
+    void enregistrer(Clients clients, Products products){
         logger.info("","Entrez le nom du client que vous voulez facturer:");
         String nom_client = scan.next();
         if(verification_client_existant(nom_client)) {
@@ -91,8 +89,8 @@ public class Clients {
         } else {logger.info("", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
     }
 
-    public void cloturer(Clients clients){
-        logger.info("","\nEntrez le nom du client dont vous voulez fermez la note:\n");
+    void cloturer(Clients clients){
+        logger.info("","\nEntrez le nom du client dont vous voulez fermez la note: ");
         String nom_client = scan.next();
         int remise = 0;
         if(verification_client_existant(nom_client)) {

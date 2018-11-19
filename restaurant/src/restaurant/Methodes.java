@@ -6,7 +6,7 @@ import logger.LoggerFactory;
 
 public class Methodes {
 
-    private Logger logger = LoggerFactory.getLogger("player");
+    private Logger logger = LoggerFactory.getLogger("methodes");
     private Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
 
     public void affichage_choix(){
@@ -25,7 +25,7 @@ public class Methodes {
     }
 
     public void enregistrer(Clients clients, Products products){
-        logger.info("","Entrez le nom du client que vous voulez facturer:");
+        logger.info("","\nEntrez le nom du client que vous voulez facturer:");
         String nom = scan.next();  int compteur = 0, index = 0;
         boolean test_nom = false; //faux par défault
 

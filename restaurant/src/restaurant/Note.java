@@ -8,7 +8,7 @@ public class Note {
 
     private String nom;
     private final LinkedList<Aliment> productList = new LinkedList<Aliment>();
-    Logger logger = LoggerFactory.getLogger("player");
+    Logger logger = LoggerFactory.getLogger("note");
 
     //constructor
     public Note(String nom){

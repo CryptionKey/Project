@@ -6,7 +6,7 @@ import logger.LoggerFactory;
 public class Main {
 
     static Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
-    static Logger logger = LoggerFactory.getLogger("player");
+    static Logger logger = LoggerFactory.getLogger("main");
     static Clients clients = new Clients();
     static Methodes methodes = new Methodes();
     static Products products = new Products();
@@ -35,6 +35,6 @@ public class Main {
             String choice = scan.next();
             bool = actions(choice, bool, products);
         }
-        logger.info("","Merci, à bientôt!");
+        logger.info(""," Merci, à bientôt!");
     }
 }

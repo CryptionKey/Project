@@ -24,6 +24,7 @@ public class Methodes {
         logger.info("","\tq: Quitter le restaurant.\n");
     }
 
+<<<<<<< master
     public void enregistrer(Clients clients, Products products){
         logger.info("","\nEntrez le nom du client que vous voulez facturer:");
         String nom = scan.next();  int compteur = 0, index = 0;
@@ -66,10 +67,9 @@ public class Methodes {
 
 
 
+=======
+>>>>>>> master
 }
-
-
-
 
  /*   boolean retirer_aliment(Products products, Aliment aliment_demande, int quantite){
 

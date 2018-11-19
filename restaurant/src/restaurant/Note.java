@@ -41,4 +41,33 @@ public class Note {
         productList.add(aliment);
     }
 
+    //Calculer le prix total HT
+    public double prixHT(LinkedList<Aliment> productList){
+        double total=0;
+        for(Aliment aliment : productList){
+            total = total + aliment.getQuantite() * aliment.getPrix();
+        }
+        return total;
+    }
+
+    //Appliquer la TVA
+    public double getTVA(double prixHT){
+        double TVA = prixHT*0.1;
+        return TVA;
+    }
+
+    //Afficher les produits enregistrés, total HT, TVA; total TTC
+    public void facture(int remise){
+        logger.info("", "\nPrix de chaque produit hors-taxe :\n");
+        this.afficherListe();
+        double prixHT = prixHT(this.productList);
+        logger.info("","Prix total hors-taxe : "+prixHT+"\n");
+        double TVA = getTVA(prixHT);
+        logger.info("","TVA : "+TVA+"\n");
+        logger.info("","Prix taxes comprises : "+(TVA + prixHT)+"\n");
+        if(remise == 1){
+            logger.info("","Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+"\n");
+        }
+    }
+
 }

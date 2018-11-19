@@ -13,13 +13,14 @@ public class Main {
 
     public static boolean actions(String choice, boolean bool, Products products){
         switch (choice) {
-            case "q": bool = true;   break;
-            case "o": methodes.affichage_choix();   break;
+            case "q": bool = true; break;
+            case "o": methodes.affichage_choix(); break;
             case "a": products.ajouter_produit(); break;
-            case "p": products.afficherListe();  break;
+            case "p": products.afficherListe(); break;
             case "n": clients.ouvrir_note(clients); break;
-            case "k": clients.afficherListe();    break;
-            case "e": methodes.enregistrer(clients, products); break;
+            case "k": clients.afficherListe(); break;
+            case "e": clients.enregistrer(clients, products); break;
+            case "f": clients.cloturer(clients); break;
         }
         return bool;
     }

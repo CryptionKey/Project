@@ -5,7 +5,7 @@ import logger.LoggerFactory;
 
 class Main {
 
-    private static Scanner scan = new Scanner(System.in); Scanner scan1 = new Scanner(System.in); Scanner scan2 = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
     private static Logger logger = LoggerFactory.getLogger("main");
     private static Clients clients = new Clients();
     private static Methodes methodes = new Methodes();

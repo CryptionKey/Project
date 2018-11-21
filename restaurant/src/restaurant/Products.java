@@ -19,9 +19,11 @@ public class Products {
 
     //Afficher la liste des aliments
     void afficherListe(){
+        StringBuilder liste = new StringBuilder("\n");
         for (Aliment aliment : this.productList) {
-            logger.info("", "\t"+aliment+"\n");
+            liste.append("\t").append(aliment).append("\n");
         }
+        logger.info("OUTPUT", liste+"\n");
     }
 
     //Ajouter un aliment à la vente
@@ -66,19 +68,20 @@ public class Products {
         return index;
     }
 
+
     void ajouter_produit(){
-        logger.info("","\nAjoutez un produit à la vente\nEntrez le nom du produit: ");
-        String nom = scan.next();
+        logger.info("OUTPUT","\nAjoutez un produit à la vente\nEntrez le nom du produit: ");
+        String nom = scan.next(); logger.info("INPUT","\tNom entré: "+nom+"\n");
         boolean test_aliment_existant = verification_aliment_existant(nom); //aliment.verification(products); /*vrai par défault */
 
         if(!test_aliment_existant) { //si l'aliment n'existe pas
-            logger.info("","Entrez la quantité du produit: ");
-            int quantite = (int)verif_chiffre();
-            logger.info("","Entrez le prix du produit: ");
-            double prix = verif_chiffre();
+            logger.info("OUTPUT","Entrez la quantité du produit: ");
+            int quantite = (int)verif_chiffre();logger.info("INPUT","\tQuantité entrée: "+quantite+"\n");
+            logger.info("OUTPUT","Entrez le prix du produit: ");
+            double prix = verif_chiffre();logger.info("INPUT","\tPrix entré: "+prix+"\n");
             create_add(nom, quantite, prix);
         }
-        else{logger.info("", "\nCe produit existe déjà\n");}
+        else{logger.info("OUTPUT", "\nCe produit existe déjà\n");}
     }
 
 
@@ -92,7 +95,7 @@ public class Products {
                 choix = Integer.parseInt(str);
                 if (choix <= 0)   throw new Exception();
             } catch (Exception e) {
-                logger.info("","Veuillez entrer un nombre positif! ");
+                logger.error("OUTPUT"," Veuillez entrer un nombre positif! ");
             }
         } while (choix<=0);
         return choix;

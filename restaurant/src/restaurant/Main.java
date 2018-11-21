@@ -27,15 +27,15 @@ class Main {
 
     public static void main(String[] args) {
 
-        logger.info("","\nBienvenue dans notre restaurant de Bagels!!\n");
+        logger.info("OUTPUT","\nBienvenue dans notre restaurant de Bagels!!\n");
         boolean bool = false;
         products.init();
 
         while(!bool) {
-            logger.info("","\nQue voulez-vous faire? [o pour afficher les opérations possibles] : ");
+            logger.info("OUTPUT","\nQue voulez-vous faire? [o pour afficher les opérations possibles] : ");
             String choice = scan.next();
             bool = actions(choice, bool, products);
         }
-        logger.info(""," Merci, à bientôt!");
+        logger.info("OUTPUT"," Merci, à bientôt!");
     }
 }

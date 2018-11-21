@@ -11,6 +11,7 @@ class Main {
     private static Methodes methodes = new Methodes();
     private static Products products = new Products();
 
+    //Fonction regroupant les opérations disponibles depuis le menu
     private static boolean actions(String choice, boolean bool, Products products){
         switch (choice) {
             case "q": bool = true; break;
@@ -25,15 +26,17 @@ class Main {
         return bool;
     }
 
+
     public static void main(String[] args) {
 
         logger.info("OUTPUT","\nBienvenue dans notre restaurant de Bagels!!\n");
-        boolean bool = false;
+        boolean bool = false;//reste faux tant que l'utilisateur ne rentre pas "q"
         products.init();
 
         while(!bool) {
             logger.info("OUTPUT","\nQue voulez-vous faire? [o pour afficher les opérations possibles] : ");
             String choice = scan.next();
+            logger.info("INPUT","Vous avez choisi l'option "+choice);
             bool = actions(choice, bool, products);
         }
         logger.info("OUTPUT"," Merci, à bientôt!");

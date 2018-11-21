@@ -15,33 +15,28 @@ public class Clients {
 
     public String toString() {return noteList.toString();}
 
-    private LinkedList<Note> getNoteList() { return noteList;  }
+    private LinkedList<Note> getNoteList() { return noteList; }
 
     //Afficher la liste des notes de client
-    void afficherListe(){
-        for (Note note : this.noteList) {
-            logger.info("OUTPUT", "\t"+note.getNom()+"\n");
-        }
-    }
+    void afficherListe(){ for (Note note : this.noteList) {logger.info("OUTPUT", "\t"+note.getNom()+"\n"); } }
 
     //Ajouter une note à la liste des clients
-    private void add (Note note){noteList.add(note);}
+    private void add (Note note)    {noteList.add(note);}
 
-    //verifier si un client se trouve déjà dans la liste
+    //Verifier si un client se trouve déjà dans la liste
     private boolean verification_client_existant(String nom_client){
         boolean verif = false; /*le client n'existe pas par défault*/
         for (Note note_courante : noteList) {
-            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
-                verif = true;} //si les chaînes sont identiques, le client existe
+            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){ verif = true;} //si les chaînes sont identiques, le client existe
         }
         return verif;
     }
 
+    //Récupérer l'index de la note demandée
     private int getIndexNote(String nom_client){
         int compteur = 0, index=0;
         for (Note note_courante : noteList) {
-            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
-                index=compteur;} //si les chaînes sont identiques, le client existe
+            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){ index=compteur;}//si les chaînes sont identiques, le client existe
             compteur++;
         }
         return index;
@@ -55,21 +50,17 @@ public class Clients {
         String nom_client = scan.next();logger.info("INPUT","\tNote du client demandée: "+nom_client+".\t");
         Note note = null;
         if(!verification_client_existant(nom_client)) {
-            note = new Note(nom_client);
-            clients.add(note);
-            logger.info("OUTPUT","Nouvelle note créée\n");
-        }
-        else {
+            note = new Note(nom_client);  clients.add(note);logger.info("OUTPUT","Nouvelle note créée\n");
+        } else {
             if(clients.noteList.get(getIndexNote(nom_client)).getProductList().size()!=0) {
                 logger.info("OUTPUT", "Voici la note demandée:\n");
                 clients.noteList.get(getIndexNote(nom_client)).afficherListe();
-            }
-            else{ logger.info("OUTPUT","Cette note ne contient encore aucun produit.\n");}
-        }
-        return note;
+            } else{ logger.error("OUTPUT","Cette note ne contient encore aucun produit.\n");}
+        } return note;
     }
 
-    void enregistrer(Clients clients, Products products){
+    Aliment enregistrer(Clients clients, Products products){
+        Aliment aliment = null;
         logger.info("OUTPUT","Entrez le nom du client que vous voulez facturer:");
         String nom_client = scan.next(); logger.info("INPUT","\tNom du client demandé: "+nom_client+".\n");
         if(verification_client_existant(nom_client)) {
@@ -81,29 +72,28 @@ public class Clients {
                 int index_aliment = products.getIndexAliment(nom_aliment);
                 Aliment aliment_demande = products.getProductList().get(index_aliment);
                 if(quantite>aliment_demande.getQuantite()){ logger.info("OUTPUT", "Il n'y en a pas assez en stock\n"); }
-                else{ Aliment aliment = new Aliment(nom_aliment.toLowerCase(), quantite, products.getProductList().get(index_aliment).getPrix());
+                else{aliment = new Aliment(nom_aliment.toLowerCase(), quantite, products.getProductList().get(index_aliment).getPrix());
                     clients.getNoteList().get(getIndexNote(nom_client)).getProductList().add(aliment);
                     if(!"café".equals(aliment_demande.getNom())){ products.getProductList().get(index_aliment).setQuantite(aliment_demande.getQuantite()-quantite);
                     if(aliment_demande.getQuantite()==0){ products.getProductList().remove(products.getProductList().get(index_aliment)); } } }
-            } else{logger.info("OUTPUT","Ce produit n'est pas proposé à la vente.\n");}
-        } else {logger.info("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
+            } else{logger.error("OUTPUT","Ce produit n'est pas proposé à la vente.\n");}
+        } else {logger.error("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
+        return aliment;
     }
 
-    void cloturer(Clients clients){
+    Clients cloturer(Clients clients){
         logger.info("OUTPUT","\nEntrez le nom du client dont vous voulez fermez la note: ");
         String nom_client = scan.next();logger.info("INPUT","\tNom du client : "+nom_client+".\n");
         int remise = 0;
-        if(verification_client_existant(nom_client)) {
-            String choix;
+        if(verification_client_existant(nom_client)) { String choix;
             do {
                 logger.info("OUTPUT", "Souhaitez-vous offrir une remise de 10% à ce client? [o : oui / n : non]");
                 choix = scan.next();logger.info("INPUT","Choix: "+choix+".\n");
             }while(!"o".equals(choix) && !"n".equals(choix));
-            if("o".equals(choix)){ remise = 1;}
-            int index_note = getIndexNote(nom_client);
+            if("o".equals(choix)){ remise = 1;}   int index_note = getIndexNote(nom_client);
             clients.noteList.get(index_note).facture(remise);
             clients.getNoteList().remove(clients.getNoteList().get(index_note));
-        } else {logger.info("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
+        } else {logger.error("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
+        return clients;
     }
-
 }

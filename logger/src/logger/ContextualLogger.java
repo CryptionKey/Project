@@ -17,13 +17,13 @@ public class ContextualLogger implements Logger {
 
     public void info(String category, String message) {
         SimpleDateFormat logFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
-        delegateLogger.info(category,"Date: "+logFormat.format(new Date()) + "      classe utilisée: " + callerClass +"      categorie du message: " + category +"        level: INFO\nle message: "+message+"\n");
+        delegateLogger.info(category,"Date: "+logFormat.format(new Date()) + "      categorie du message: " + category +"        level: INFO       classe utilisée: " + callerClass +"\nle message: "+message+"\n");
     }
 
 
     public void error(String category, String message) {
         SimpleDateFormat logFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
-        delegateLogger.info(category,"Date: "+logFormat.format(new Date()) + "      classe utilisée: " + callerClass +"      categorie du message: " + category +"        level: ERROR\nle message: "+message+"\n");
+        delegateLogger.info(category,"Date: "+logFormat.format(new Date()) + "      categorie du message: " + category +"        level: ERROR      classe utilisée: " + callerClass +"\nle message: "+message+"\n");
 
     }
 }

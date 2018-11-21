@@ -10,7 +10,6 @@ public class Products {
     private Logger logger = LoggerFactory.getLogger("product");
     private Scanner scan = new Scanner(System.in);
 
-
     public String toString() {
         return productList.toString();
     }
@@ -20,11 +19,10 @@ public class Products {
     //Afficher la liste des aliments
     void afficherListe(){
         StringBuilder liste = new StringBuilder("\n");
-        for (Aliment aliment : this.productList) {
-            liste.append("\t").append(aliment).append("\n");
-        }
+        for (Aliment aliment : this.productList) { liste.append("\t").append(aliment).append("\n");  }
         logger.info("OUTPUT", liste+"\n");
     }
+
 
     //Ajouter un aliment à la vente
     private void add (Aliment aliment){
@@ -61,8 +59,7 @@ public class Products {
     int getIndexAliment(String nom_aliment){
         int compteur = 0, index=0;
         for (Aliment aliment_courant : productList) {
-            if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){
-                index=compteur;} //si les chaînes sont identiques, l'aliment existe
+            if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){index=compteur;}
             compteur++;
         }
         return index;
@@ -72,7 +69,7 @@ public class Products {
     void ajouter_produit(){
         logger.info("OUTPUT","\nAjoutez un produit à la vente\nEntrez le nom du produit: ");
         String nom = scan.next(); logger.info("INPUT","\tNom entré: "+nom+"\n");
-        boolean test_aliment_existant = verification_aliment_existant(nom); //aliment.verification(products); /*vrai par défault */
+        boolean test_aliment_existant = verification_aliment_existant(nom);  /*vrai par défault */
 
         if(!test_aliment_existant) { //si l'aliment n'existe pas
             logger.info("OUTPUT","Entrez la quantité du produit: ");
@@ -85,10 +82,10 @@ public class Products {
     }
 
 
+    //Tester ce que rentre l'utilisatuer lorsu'on attend un nombre
     private double verif_chiffre() {
         Scanner scan = new Scanner(System.in);
         double choix = 0 ; String str;
-
         do {
             str = (scan.nextLine());
             try {

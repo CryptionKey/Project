@@ -59,27 +59,52 @@ public class Clients {
         } return note;
     }
 
-    Aliment enregistrer(Clients clients, Products products){
+    private Note selection_client(Clients clients){
+        Note note = null;
+        logger.info("OUTPUT","\nEntrez le nom du client que vous souhaitez facturer:");
+        String nom_client = scan.next();
+        logger.info("INPUT","\tNom du client demandé: "+nom_client+".\n");
+        if(clients.verification_client_existant(nom_client)) { note = clients.getNoteList().get(getIndexNote(nom_client)); }
+        else {logger.error("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
+        return note;
+    }
+
+    private Aliment selection_aliment(Products products){
         Aliment aliment = null;
-        logger.info("OUTPUT","Entrez le nom du client que vous voulez facturer:");
-        String nom_client = scan.next(); logger.info("INPUT","\tNom du client demandé: "+nom_client+".\n");
-        if(verification_client_existant(nom_client)) {
-            logger.info("OUTPUT","Entrez le nom de l'article que vous souhaitez facturer:");
-            String nom_aliment = scan.next(); logger.info("INPUT","\tNom de l'aliment demandé: "+nom_aliment+".\n");
-            if(products.verification_aliment_existant(nom_aliment)) {
-                logger.info("OUTPUT","Entrez la quantité du produit souhaité:");
-                int quantite = scan.nextInt();logger.info("INPUT","\tQuantité demandée: "+quantite+".\n");
-                int index_aliment = products.getIndexAliment(nom_aliment);
-                Aliment aliment_demande = products.getProductList().get(index_aliment);
-                if(quantite>aliment_demande.getQuantite()){ logger.info("OUTPUT", "Il n'y en a pas assez en stock\n"); }
-                else{aliment = new Aliment(nom_aliment.toLowerCase(), quantite, products.getProductList().get(index_aliment).getPrix());
-                    clients.getNoteList().get(getIndexNote(nom_client)).getProductList().add(aliment);
-                    if(!"café".equals(aliment_demande.getNom())){ products.getProductList().get(index_aliment).setQuantite(aliment_demande.getQuantite()-quantite);
-                    if(aliment_demande.getQuantite()==0){ products.getProductList().remove(products.getProductList().get(index_aliment)); } } }
-            } else{logger.error("OUTPUT","Ce produit n'est pas proposé à la vente.\n");}
-        } else {logger.error("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
+        logger.info("OUTPUT","\nEntrez le nom de l'article que vous souhaitez facturer:");
+        String nom_aliment = scan.next();
+        logger.info("INPUT","\tNom de l'aliment demandé: "+nom_aliment+".\n");
+        if(products.verification_aliment_existant(nom_aliment)) { aliment = products.getProductList().get(products.getIndexAliment(nom_aliment)); }
+        else{logger.error("OUTPUT","Ce produit n'est pas proposé à la vente.\n");}
         return aliment;
     }
+
+    private int selection_quantite(Aliment aliment_demande, Products products){
+        logger.info("OUTPUT","\nEntrez la quantité du produit souhaité:");
+        int quantite = scan.nextInt();logger.info("INPUT","\tQuantité demandée: "+quantite+".\n");
+        int index_aliment = products.getIndexAliment(aliment_demande.getNom());
+        if(quantite>products.getProductList().get(index_aliment).getQuantite()){
+            logger.info("OUTPUT", "Il n'y en a pas assez en stock\n");
+            quantite=-1; }
+        else {
+            int nouveau_stock = (products.getProductList().get(index_aliment).getQuantite())-quantite;
+            if(!"café".equals(aliment_demande.getNom())){
+                products.getProductList().get(index_aliment).setQuantite(nouveau_stock);
+            if(products.getProductList().get(index_aliment).getQuantite()==0){ products.getProductList().remove(products.getProductList().get(index_aliment)); } } }
+        return quantite;
+    }
+
+    void enregistrer(Clients clients, Products products){
+        Note note_client = selection_client(clients);
+        if(note_client != null) {
+            Aliment aliment_demande = selection_aliment(products);
+            if(aliment_demande != null) {
+                int quantite = selection_quantite(aliment_demande, products);
+                if(quantite != -1){
+                    Aliment aliment_ajoute = new Aliment(aliment_demande.getNom(), quantite, aliment_demande.getPrix());
+                    clients.getNoteList().get(getIndexNote(note_client.getNom())).getProductList().add(aliment_ajoute); } } }
+    }
+
 
     Clients cloturer(Clients clients){
         logger.info("OUTPUT","\nEntrez le nom du client dont vous voulez fermez la note: ");
@@ -96,4 +121,5 @@ public class Clients {
         } else {logger.error("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
         return clients;
     }
+
 }

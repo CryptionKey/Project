@@ -68,11 +68,11 @@ public class Note {
         logger.info("OUTPUT", "\nPrix de chaque produit hors-taxe :\n");
         this.afficherListe();
         double prixHT = prixHT(this.productList);
-        String message = "Prix total hors-taxe : "+prixHT+"\n";
+        String message = "Prix total hors-taxe : "+prixHT+" €\n";
         double TVA = getTVA(prixHT);
-        message += "TVA : "+TVA+"\nPrix taxes comprises : "+(TVA + prixHT)+"\n";
+        message += "TVA : "+TVA+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
         if(remise == 1){//Si le vendeur a choisi de faire la remise de 10%
-            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+"\n");
+            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+" €\n");
         }
         else logger.info("OUTPUT",message); //s'il n'y a pas de remise
     }

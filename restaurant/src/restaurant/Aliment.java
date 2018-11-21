@@ -12,7 +12,6 @@ class Aliment {
         else{ return "\u221E "+nom+"(s) coûtant chacun "+prix+" €"; }
     }
 
-
     //getters
     String getNom(){return nom; }
     int getQuantite(){ return quantite; }
@@ -23,10 +22,10 @@ class Aliment {
 
 
     //constructor
-    Aliment(String name, int quantity, double price){
-        this.quantite = quantity;
-        this.nom = name;
-        this.prix = price;
+    Aliment(String nom, int quantite, double prix){
+        this.quantite = quantite;
+        this.nom = nom;
+        this.prix = prix;
     }
 
 }

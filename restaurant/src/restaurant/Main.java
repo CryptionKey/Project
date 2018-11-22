@@ -10,6 +10,7 @@ class Main {
     private static Clients clients = new Clients();
     private static Methodes methodes = new Methodes();
     private static Products products = new Products();
+    private static Caisse caisse = new Caisse();
 
     //Fonction regroupant les opérations disponibles depuis le menu
     private static boolean actions(String choice, boolean bool, Products products){
@@ -18,14 +19,13 @@ class Main {
             case "o": methodes.affichage_choix(); break;
             case "a": products.ajouter_produit(); break;
             case "p": products.afficherListe(); break;
-            case "n": clients.ouvrir_note(clients); break;
+            case "n": caisse.ouvrir_note(clients); break;
             case "k": clients.afficherListe(); break;
-            case "e": clients.enregistrer(clients, products); break;
-            case "f": clients.cloturer(clients); break;
+            case "e": caisse.enregistrer(clients, products); break;
+            case "f": caisse.cloturer(clients); break;
         }
         return bool;
     }
-
 
     public static void main(String[] args) {
 

@@ -23,19 +23,16 @@ public class Products {
         logger.info("OUTPUT", liste+"\n");
     }
 
-
     //Ajouter un aliment à la vente
     private void add (Aliment aliment){
         productList.add(aliment);
     }
-
 
     //Créer puis ajouter un aliment à la vente
     private void create_add(String nom, int quantite, double prix){
         Aliment aliment = new Aliment(nom, quantite, prix);
         this.add(aliment);
     }
-
 
     //Initialiser les produits mis en vente
     void init() {
@@ -46,7 +43,6 @@ public class Products {
         create_add("café", (int)inf, 2);
     }
 
-
     boolean verification_aliment_existant(String nom){
         boolean verif = false; /*l'aliment n'existe pas par défault*/
         for (Aliment aliment_courant : productList) {
@@ -54,6 +50,16 @@ public class Products {
                 verif = true;} //si les chaînes sont identiques, l'aliment existe
         }
         return verif;
+    }
+
+    Aliment selection_aliment(Products products){
+        Aliment aliment = null;
+        logger.info("OUTPUT","\nEntrez le nom de l'article que vous souhaitez facturer:");
+        String nom_aliment = scan.next();
+        logger.info("INPUT","\tNom de l'aliment demandé: "+nom_aliment+".\n");
+        if(products.verification_aliment_existant(nom_aliment)) { aliment = products.getProductList().get(products.getIndexAliment(nom_aliment)); }
+        else{logger.error("OUTPUT","Ce produit n'est pas proposé à la vente.\n");}
+        return aliment;
     }
 
     int getIndexAliment(String nom_aliment){
@@ -64,7 +70,6 @@ public class Products {
         }
         return index;
     }
-
 
     void ajouter_produit(){
         logger.info("OUTPUT","\nAjoutez un produit à la vente\nEntrez le nom du produit: ");
@@ -80,7 +85,6 @@ public class Products {
         }
         else{logger.info("OUTPUT", "\nCe produit existe déjà\n");}
     }
-
 
     //Tester ce que rentre l'utilisatuer lorsu'on attend un nombre
     private double verif_chiffre() {

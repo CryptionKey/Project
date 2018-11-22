@@ -17,9 +17,7 @@ class Aliment {
     int getQuantite(){ return quantite; }
     double getPrix(){ return prix; }
 
-
     void setQuantite(int quantite) { this.quantite = quantite; }
-
 
     //constructor
     Aliment(String nom, int quantite, double prix){

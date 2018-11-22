@@ -1,6 +1,5 @@
 package restaurant;
 
-import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
@@ -9,7 +8,7 @@ class Methodes {
     private Logger logger = LoggerFactory.getLogger("methodes");
 
     void affichage_choix() {
-        logger.info("OUTPU", "\n\to: Afficher la liste des opérations disponibles.\n" +
+        logger.info("OUTPUT", "\n\to: Afficher la liste des opérations disponibles.\n" +
                                           "\tp: Afficher la liste des produits à la vente.\n" +
                                           "\ta: Ajouter un produit à la vente.\n" +
                                           "\tn: Ouvrir la note d'un client.\n" +

@@ -29,11 +29,14 @@ public class Note {
 
     //Afficher la liste d'aliments de la note
     void afficherListe(){
-        String message = "";//initilisation du message qui sera affiché
-        for (Aliment aliment : this.productList) {
-            message += "\t"+aliment+"\n";//Chaque aliment de la liste est ajouté au message
-        }
-        logger.info("OUTPUT", message);//On affiche le message entier
+        if(this.getProductList().size()!=0) {
+            logger.info("OUTPUT", "Voici la note demandée:\n");
+            String message = "";//initilisation du message qui sera affiché
+            for (Aliment aliment : this.productList) {
+                message += "\t" + aliment + "\n";//Chaque aliment de la liste est ajouté au message
+            }
+            logger.info("OUTPUT", message); //On affiche le message entier
+        } else{ logger.error("OUTPUT","Cette note ne contient encore aucun produit.\n");}
     }
 
     //Ajouter un aliment à la note
@@ -58,7 +61,7 @@ public class Note {
     //Afficher les produits enregistrés, total HT, TVA; total TTC
     void facture(int remise){
         logger.info("OUTPUT", "\nPrix de chaque produit hors-taxe :\n");
-        this.afficherListe();
+        afficherListe();
         double prixHT = prixHT(this.productList);
         String message = "Prix total hors-taxe : "+prixHT+" €\n";
         double TVA = getTVA(prixHT);

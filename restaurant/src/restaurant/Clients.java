@@ -18,10 +18,21 @@ public class Clients {
     LinkedList<Note> getNoteList() { return noteList; }
 
     //Afficher la liste des notes de client
-    void afficherListe(){ for (Note note : this.noteList) {logger.info("OUTPUT", "\t"+note.getNom()+"\n"); } }
+    void afficherListe() {
+        if (this.getNoteList().size() != 0) {
+            logger.info("OUTPUT", "Les clients actuellement dans le restaurant sont:\n");
+            for (Note note : this.noteList) {
+                logger.info("OUTPUT", "\t" + note.getNom() + "\n"); } }
+    }
 
     //Ajouter une note à la liste des clients
     void add(Note note) {noteList.add(note);}
+
+    void creer_note(String nom_client) {
+        Note note = new Note(nom_client);
+        this.add(note);
+        logger.info("OUTPUT", "Nouvelle note créée\n");
+    }
 
     //Verifier si un client se trouve déjà dans la liste
     boolean verification_client_existant(String nom_client){

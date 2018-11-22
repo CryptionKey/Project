@@ -9,21 +9,20 @@ public class Caisse {
     private Logger logger = LoggerFactory.getLogger("client");
     private Scanner scan = new Scanner(System.in);
 
-    Note ouvrir_note(Clients clients){
-        if(clients.getNoteList().size()!=0){
-            logger.info("OUTPUT","Les clients actuellement dans le restaurant sont:\n");
-            clients.afficherListe();}
-        logger.info("OUTPUT","\nDonnez le nom du client dont vous souhaitez ouvrir ou créer la note: ");
+    /*logger.info("OUTPUT","\nDonnez le nom du client dont vous souhaitez ouvrir ou créer la note: ");
         String nom_client = scan.next();logger.info("INPUT","\tNote du client demandée: "+nom_client+".\t");
         Note note = null;
         if(!clients.verification_client_existant(nom_client)) {
-            note = new Note(nom_client);  clients.add(note);logger.info("OUTPUT","Nouvelle note créée\n");
+            note = new Note(nom_client);  clients.add(note);logger.info("OUTPUT","Nouvelle note créée\n");*/
+
+    void ouvrir_note(Clients clients){
+        clients.afficherListe();
+        Note note_client = clients.selection_client(clients);
+        if(note_client == null) {
+            clients.creer_note(note_client.getNom());
         } else {
-            if(clients.getNoteList().get(clients.getIndexNote(nom_client)).getProductList().size()!=0) {
-                logger.info("OUTPUT", "Voici la note demandée:\n");
-                clients.getNoteList().get(clients.getIndexNote(nom_client)).afficherListe();
-            } else{ logger.error("OUTPUT","Cette note ne contient encore aucun produit.\n");}
-        } return note;
+            note_client.afficherListe();
+        } //return note_client;
     }
 
     void enregistrer(Clients clients, Products products){

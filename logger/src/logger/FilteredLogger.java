@@ -21,7 +21,7 @@ public class FilteredLogger implements Logger {
 
     public void error(String category, String message) {
         if(condition.test(message))
-            delegate.info(category, message);
+            delegate.error(category, message);
     }
 
 }

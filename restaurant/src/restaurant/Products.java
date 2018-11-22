@@ -23,19 +23,16 @@ public class Products {
         logger.info("OUTPUT", liste+"\n");
     }
 
-
     //Ajouter un aliment à la vente
     private void add (Aliment aliment){
         productList.add(aliment);
     }
-
 
     //Créer puis ajouter un aliment à la vente
     private void create_add(String nom, int quantite, double prix){
         Aliment aliment = new Aliment(nom, quantite, prix);
         this.add(aliment);
     }
-
 
     //Initialiser les produits mis en vente
     void init() {
@@ -46,14 +43,23 @@ public class Products {
         create_add("café", (int)inf, 2);
     }
 
-
-    boolean verification_aliment_existant(String nom){
+    private boolean verification_aliment_existant(String nom){
         boolean verif = false; /*l'aliment n'existe pas par défault*/
         for (Aliment aliment_courant : productList) {
             if(aliment_courant.getNom().toLowerCase().compareTo(nom.toLowerCase())==0){
                 verif = true;} //si les chaînes sont identiques, l'aliment existe
         }
         return verif;
+    }
+
+    Aliment selection_aliment(Products products){
+        Aliment aliment = null;
+        logger.info("OUTPUT","\nEntrez le nom de l'article que vous souhaitez facturer:");
+        String nom_aliment = scan.next();
+        logger.info("INPUT","\tNom de l'aliment demandé: "+nom_aliment+".\n");
+        if(products.verification_aliment_existant(nom_aliment)) { aliment = products.getProductList().get(products.getIndexAliment(nom_aliment)); }
+        else{logger.error("OUTPUT","Ce produit n'est pas proposé à la vente.\n");}
+        return aliment;
     }
 
     int getIndexAliment(String nom_aliment){
@@ -65,7 +71,6 @@ public class Products {
         return index;
     }
 
-
     void ajouter_produit(){
         logger.info("OUTPUT","\nAjoutez un produit à la vente\nEntrez le nom du produit: ");
         String nom = scan.next(); logger.info("INPUT","\tNom entré: "+nom+"\n");
@@ -73,23 +78,23 @@ public class Products {
 
         if(!test_aliment_existant) { //si l'aliment n'existe pas
             logger.info("OUTPUT","Entrez la quantité du produit: ");
-            int quantite = (int)verif_chiffre();logger.info("INPUT","\tQuantité entrée: "+quantite+"\n");
+            int quantite = (int)verif_chiffre("entier");logger.info("INPUT","\tQuantité entrée: "+quantite+"\n");
             logger.info("OUTPUT","Entrez le prix du produit: ");
-            double prix = verif_chiffre();logger.info("INPUT","\tPrix entré: "+prix+"\n");
+            double prix = verif_chiffre("double");logger.info("INPUT","\tPrix entré: "+prix+"\n");
             create_add(nom, quantite, prix);
         }
-        else{logger.info("OUTPUT", "\nCe produit existe déjà\n");}
+        else{logger.error("OUTPUT", "\nCe produit existe déjà\n");}
     }
 
-
     //Tester ce que rentre l'utilisatuer lorsu'on attend un nombre
-    private double verif_chiffre() {
+    private double verif_chiffre(String type) {
         Scanner scan = new Scanner(System.in);
         double choix = 0 ; String str;
         do {
             str = (scan.nextLine());
             try {
-                choix = Integer.parseInt(str);
+                if(type == "double"){choix = Double.parseDouble(str);}
+                if(type == "entier"){choix = Integer.parseInt(str);}
                 if (choix <= 0)   throw new Exception();
             } catch (Exception e) {
                 logger.error("OUTPUT"," Veuillez entrer un nombre positif! ");

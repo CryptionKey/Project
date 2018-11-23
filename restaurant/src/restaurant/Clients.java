@@ -38,7 +38,9 @@ public class Clients {
     boolean verification_client_existant(String nom_client){
         boolean verif = false; /*le client n'existe pas par défault*/
         for (Note note_courante : noteList) {
-            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){ verif = true;} //si les chaînes sont identiques, le client existe
+            if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){ verif = true;
+                System.out.print("rentrée dans le if_verif\n");
+            } //si les chaînes sont identiques, le client existe
         }
         return verif;
     }
@@ -53,14 +55,16 @@ public class Clients {
         return index;
     }
 
-    Note selection_client(Clients clients){
+    String selection_client(Clients clients){
         Note note = null;
         logger.info("OUTPUT","\nEntrez le nom du client que vous souhaitez facturer:");
         String nom_client = scan.next();
         logger.info("INPUT","\tNom du client demandé: "+nom_client+".\n");
-        if(clients.verification_client_existant(nom_client)) { note = clients.getNoteList().get(getIndexNote(nom_client)); }
+        if(clients.verification_client_existant(nom_client)) { note = clients.getNoteList().get(getIndexNote(nom_client));
+        System.out.print("rentrée dans le if\n");
+        }
         else {logger.error("OUTPUT", "Ce client n'existe pas, ouvrez d'abord une nouvelle note (entrez n)\n"); }
-        return note;
+        return nom_client;
     }
 
     int selection_quantite(Aliment aliment_demande, Products products){

@@ -18,8 +18,9 @@ public class Caisse {
     void ouvrir_note(Clients clients){
         clients.afficherListe();
         Note note_client = clients.selection_client(clients);
+        //String nom_client = note_client.getNom();
         if(note_client == null) {
-            clients.creer_note(note_client.getNom());
+            clients.creer_note(nom_client);
         } else {
             note_client.afficherListe();
         } //return note_client;

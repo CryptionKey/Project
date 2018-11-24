@@ -55,7 +55,7 @@ public class Clients {
     private boolean verification_stock(int quantite, int index_aliment, Products products){
         boolean stock = true; //assez de stock par défaut
         if(quantite>products.getProductList().get(index_aliment).getQuantite()){
-            logger.info("OUTPUT", "Il n'y en a pas assez en stock\n");
+            logger.error("OUTPUT", "Il n'y en a pas assez en stock\n");
             stock=false; }
         return stock;
     }
@@ -69,7 +69,7 @@ public class Clients {
     }
 
     int selection_quantite(Aliment aliment_demande, Products products){
-        double quantite = Affichage.verification_nombre(Affichage.output_quantite, Affichage.input_quantite);
+        double quantite = Affichage.verification_nombre("entier",Affichage.output_quantite, Affichage.input_quantite);
         int index_aliment = products.getIndexAliment(aliment_demande.getNom());
         if(verification_stock((int)quantite, index_aliment, products)) {
             mise_a_jour_stock(index_aliment, (int)quantite, aliment_demande, products); }

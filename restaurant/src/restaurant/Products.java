@@ -1,6 +1,5 @@
 package restaurant;
 import java.util.LinkedList;
-import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
@@ -8,7 +7,6 @@ public class Products {
 
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private Logger logger = LoggerFactory.getLogger("product");
-    private Scanner scan = new Scanner(System.in);
 
     public String toString() {
         return productList.toString();
@@ -67,8 +65,8 @@ public class Products {
         String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_ajouter, Affichage.input_nom_aliment_ajouter);
         Aliment aliment = verification_aliment_existant(nom_aliment, false);
         if(aliment==null) { //si l'aliment n'existe pas
-            int quantite = (int)Affichage.verification_nombre(Affichage.output_quantite, Affichage.input_quantite);
-            double prix = Affichage.verification_nombre(Affichage.output_prix, Affichage.input_prix);
+            int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);
+            double prix = Affichage.verification_nombre("double", Affichage.output_prix, Affichage.input_prix);
             create_add(nom_aliment, quantite, prix);
         } else {
             logger.info("OUTPUT", "\nCe produit existe déjà\n");}

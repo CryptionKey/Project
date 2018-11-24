@@ -58,13 +58,14 @@ class Affichage {
     }
 
     //Tester ce que rentre l'utilisateur lorsqu'on attend un nombre
-    static double verification_nombre(String chaine_out, String chaine_in) {
+    static double verification_nombre(String type, String chaine_out, String chaine_in) {
         double choix = 0 ;
         String nombre;
         do {
             nombre = choix_chaine(chaine_out, chaine_in);
             try {
-                choix = Integer.parseInt(nombre);
+                if(type == "double"){choix = Double.parseDouble(nombre);}
+                if(type == "entier"){choix = Integer.parseInt(nombre);}
                 if (choix <= 0)   throw new Exception();
             } catch (Exception e) {
                 logger.error("OUTPUT"," Veuillez entrer un nombre positif! ");

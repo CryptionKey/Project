@@ -1,6 +1,7 @@
 package restaurant;
 
 import java.util.LinkedList;
+import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
@@ -8,24 +9,19 @@ public class Note {
 
     private String nom;
     private final LinkedList<Aliment> productList = new LinkedList<>();
-    private Logger logger = LoggerFactory.getLogger("note");
+    private static Logger logger = LoggerFactory.getLogger("note");
+    private static Scanner scan = new Scanner(System.in);
 
     //constructor
-    Note(String nom){
-        this.nom = nom.toLowerCase();
-    }
+    Note(String nom){ this.nom = nom.toLowerCase(); }
 
     //Pour retourner la liste
     LinkedList<Aliment> getProductList() {return productList;}
 
     //Pour récupérer le nom.
-    String getNom(){
-        return nom;
-    }
+    String getNom(){ return nom; }
 
-    public String toString(){
-        return ""+nom+":\n"+productList.toString()+"";
-    }
+    public String toString(){ return ""+nom+":\n"+productList.toString()+""; }
 
     //Afficher la liste d'aliments de la note
     void afficherListe(){
@@ -39,9 +35,17 @@ public class Note {
         } else{ logger.error("OUTPUT","Cette note ne contient encore aucun produit.\n");}
     }
 
-    //Ajouter un aliment à la note
-    public void add (Aliment aliment){
-        productList.add(aliment);
+    //Demander si on veut offrir une remise
+    static boolean demander_remise(){
+        boolean remise = false;
+        String choix;
+        do {
+            logger.info("OUTPUT", "Souhaitez-vous offrir une remise de 10% à ce client? [o : oui / n : non]");
+            choix = scan.next();
+            logger.info("INPUT","Choix: "+choix+".\n");
+        }while(!"o".equals(choix) && !"n".equals(choix));
+            if("o".equals(choix)){ remise = true;}
+        return remise;
     }
 
     //Calculer le prix total HT, c'est le prix affiché dans le menu
@@ -59,16 +63,15 @@ public class Note {
     }
 
     //Afficher les produits enregistrés, total HT, TVA; total TTC
-    void facture(int remise){
+    void afficher_facture(boolean remise){
         logger.info("OUTPUT", "\nPrix de chaque produit hors-taxe :\n");
         afficherListe();
         double prixHT = prixHT(this.productList);
         String message = "Prix total hors-taxe : "+prixHT+" €\n";
         double TVA = getTVA(prixHT);
         message += "TVA : "+TVA+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
-        if(remise == 1){//Si le vendeur a choisi de faire la remise de 10%
-            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+" €\n");
-        }
+        if(remise){//Si le vendeur a choisi de faire la remise de 10%
+            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+" €\n"); }
         else logger.info("OUTPUT",message); //s'il n'y a pas de remise
     }
 

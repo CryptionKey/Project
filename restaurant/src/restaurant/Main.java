@@ -1,22 +1,20 @@
 package restaurant;
-import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
 class Main {
 
-    private static Scanner scan = new Scanner(System.in);
     private static Logger logger = LoggerFactory.getLogger("main");
     private static Clients clients = new Clients();
-    private static Methodes methodes = new Methodes();
+    private static Affichage affichage = new Affichage();
     private static Products products = new Products();
     private static Caisse caisse = new Caisse();
 
     //Fonction regroupant les opérations disponibles depuis le menu
-    private static boolean actions(String choice, boolean bool, Products products){
+    private static boolean actions(String choice, boolean continuer, Products products){
         switch (choice) {
-            case "q": bool = true; break;
-            case "o": methodes.affichage_choix(); break;
+            case "q": continuer = true; break;
+            case "o": affichage.affichage_choix(); break;
             case "a": products.ajouter_produit(); break;
             case "p": products.afficherListe(); break;
             case "n": caisse.ouvrir_note(clients); break;
@@ -24,21 +22,17 @@ class Main {
             case "e": caisse.enregistrer(clients, products); break;
             case "f": caisse.cloturer(clients); break;
         }
-        return bool;
+        return continuer;
     }
 
     public static void main(String[] args) {
-
         logger.info("OUTPUT","\nBienvenue dans notre restaurant de Bagels!!\n");
-        boolean bool = false;//reste faux tant que l'utilisateur ne rentre pas "q"
-        products.init();
-
-        while(!bool) {
-            logger.info("OUTPUT","\nQue voulez-vous faire? [o pour afficher les opérations possibles] : ");
-            String choice = scan.next();
-            logger.info("INPUT","Vous avez choisi l'option "+choice);
-            bool = actions(choice, bool, products);
-        }
+        boolean continuer = false;//reste faux tant que l'utilisateur ne rentre pas "q"
+        products.initialiser();
+        while(!continuer) {
+            String choix = Affichage.choix_chaine(Affichage.output_choix, Affichage.input_choix);
+            continuer = actions(choix, continuer, products); }
         logger.info("OUTPUT"," Merci, à bientôt!");
     }
+
 }

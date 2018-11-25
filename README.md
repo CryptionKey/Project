@@ -40,13 +40,15 @@ IntelliJ Idea
 - possibilité d'offrir une remise de 10% au moment de la clôture d'une note
 
 ## Difficultés rencontrées:
-- gestion de multiples cas:
+### gestion de multiples cas:
 	- vérifier qu'un client existe
 	- vérifier qu'un produit soit en vente
 	- vérifier qu'il y en a assez par rapport à la quantité demandée par un client
-	- vérifier si un client reprend d'un même produit, auquel cas il faut incrémenter la quantité du produit déjà présent sur sa note
-*Résolution :* création de plusieurs méthodes de vérification pour traiter ces différents cas
+	- vérifier si un client reprend d'un même produit, auquel cas il faut incrémenter la quantité du produit déjà présent sur sa note<br/>
+**Résolution :** création de plusieurs méthodes de vérification pour traiter ces différents cas
 
-- difficultés à respecter le nombre maximal de lignes autorisées pour les méthodes et les classes
-*Résolution :* cela nous a contraint à penser "orienté objet" et à créer plus de méthodes afin de diviser le code en plusieurs actions élémentaires
+### difficultés à respecter le nombre maximal de lignes autorisées pour les méthodes et les classes<br/>
+**Résolution :** cela nous a contraint à penser "orienté objet" et à créer plus de méthodes afin de diviser le code en plusieurs actions élémentaires
 
+### Transmission des avancées de chacun <br/>
+**Résolution :** Utilisation de GitHub qui nous a fait économiser beaucoup de temps, notamment pour fusionner nos versions du projet

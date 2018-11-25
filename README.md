@@ -21,12 +21,12 @@ Java, bash, markdown
 IntelliJ Idea
 
 ## Fonctionnalités:
--afficher la liste des opérations disponibles
--ajouter un produit à la vente (nom, prix, stock)
--afficher la liste des produits à la vente (ainsi que le nombre restant)
--ouvrir la note d'un client (il peut y avoir plusieurs clients dans le restaurant au même moment)
--enregistrer la vente d'un produit sur la note d'un client
--clôturer la note d'un client en affichant :
+*afficher la liste des opérations disponibles
+*ajouter un produit à la vente (nom, prix, stock)
+*afficher la liste des produits à la vente (ainsi que le nombre restant)
+*ouvrir la note d'un client (il peut y avoir plusieurs clients dans le restaurant au même moment)
+*enregistrer la vente d'un produit sur la note d'un client
+*clôturer la note d'un client en affichant :
 	-le prix de chaque produit HT (hors-taxe)
 	-le prix total HT
 	-la TVA (10%)

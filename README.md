@@ -6,12 +6,6 @@ Etudes
 ## Lien des consignes :
 https://github.com/ledoyen/tp-java/tree/master/projet/3A_2018
 
-## Développeurs:
-Daniel Elgrably<br/>
-Axel Dran<br/>
-Etudiants ESIEA 3e année<br/>
-Classe 33<br/>
-
 ## Temps de développement:
 Octobre-Novembre 2018
 
@@ -44,7 +38,7 @@ IntelliJ Idea
 - Vérifier qu'un client existe
 - Vérifier qu'un produit soit en vente
 - Vérifier qu'il y en a assez par rapport à la quantité demandée par un client
-- Vérifier si un client reprend d'un même produit, auquel cas il faut incrémenter la quantité du produit déjà présent sur sa note<br/>
+- Vérifier si un client reprend d'un même produit, auquel cas il faut incrémenter la quantité du produit déjà présent sur sa note
 **Résolution :** création de plusieurs méthodes de vérification pour traiter ces différents cas
 
 ### __Difficultés à respecter le nombre maximal de lignes autorisées pour les méthodes et les classes__

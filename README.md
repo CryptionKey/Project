@@ -1,25 +1,26 @@
 ## Programme de gestion d'un restaurant de Bagel
 
-# Cadre : études
+## Cadre :
+Etudes
 
-# Lien des consignes :
-(https://github.com/ledoyen/tp-java/tree/master/projet/3A_2018)
+## Lien des consignes :
+https://github.com/ledoyen/tp-java/tree/master/projet/3A_2018
 
-# Développeurs:
+## Développeurs:
 ELGRABLY Daniel
 DRAN Axel
 (ESIEA 3A - Classe 33)
 
-# Temps de développement:
+## Temps de développement:
 Octobre-Novembre 2018
 
-# Langages utilisés:
+## Langages utilisés:
 Java, bash, markdown
 
-#IDE utilisé :
+## IDE utilisé :
 IntelliJ Idea
 
-#Fonctionnalités:
+## Fonctionnalités:
 -afficher la liste des opérations disponibles
 -ajouter un produit à la vente (nom, prix, stock)
 -afficher la liste des produits à la vente (ainsi que le nombre restant)
@@ -37,7 +38,7 @@ IntelliJ Idea
 -retrait automatique de la liste des produits en vente d'un produit en rupture de stock
 -possibilité d'offrir une remise de 10% au moment de la clôture d'une note
 
-#Difficultés rencontrées:
+## Difficultés rencontrées:
 -gestion de multiples cas:
 	-vérifier qu'un client existe
 	-vérifier qu'un produit soit en vente

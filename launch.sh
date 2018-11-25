@@ -1,3 +1,3 @@
 #!bin/bash
 
- java -classpath restaurant/bin:logger/bin restaurant.Main
+java -classpath restaurant/bin:logger/bin restaurant.Main

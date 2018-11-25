@@ -1,4 +1,4 @@
-package logger;
+/*package logger;
 
 import java.util.function.Predicate;
 
@@ -24,4 +24,4 @@ public class FilteredLogger implements Logger {
             delegate.error(category, message);
     }
 
-}
+}*/

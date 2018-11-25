@@ -21,6 +21,7 @@ class Main {
             case "k": clients.afficherListe(); break;
             case "e": caisse.enregistrer(clients, products); break;
             case "f": caisse.cloturer(clients); break;
+            case "c": caisse.donnees_comptable(); break;
         }
         return continuer;
     }

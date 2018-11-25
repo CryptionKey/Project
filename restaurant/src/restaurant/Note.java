@@ -71,8 +71,9 @@ public class Note {
         double TVA = getTVA(prixHT);
         message += "TVA : "+TVA+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
         if(remise){//Si le vendeur a choisi de faire la remise de 10%
-            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+" €\n"); }
-        else logger.info("OUTPUT",message); //s'il n'y a pas de remise
+            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+" €\n");}
+        else{logger.info("OUTPUT",message);} //s'il n'y a pas de remise
+        Caisse.mise_a_jour_donnees_comptable(remise, prixHT, TVA);
     }
 
 }

@@ -1,6 +1,13 @@
 package restaurant;
 
+import logger.Logger;
+import logger.LoggerFactory;
+
 public class Caisse {
+
+    private Logger logger = LoggerFactory.getLogger("caisse");
+    private static double total_TVA=0;
+    private static double total_argent=0;
 
     void ouvrir_note(Clients clients){
         clients.afficherListe();
@@ -33,6 +40,20 @@ public class Caisse {
             boolean remise = Note.demander_remise();
             clients.getNoteList().get(index_note).afficher_facture(remise);
             clients.getNoteList().remove(clients.getNoteList().get(index_note)); }
+    }
+
+    void donnees_comptable(){
+        logger.info("OUTPUT","Total des rentrées d'argent: "+total_argent+"\n");
+        logger.info("OUTPUT","Total de la TVA facturée: "+total_TVA+"\n");
+    }
+
+    static void mise_a_jour_donnees_comptable(boolean remise, double prixHT, double TVA){
+        if(!remise){
+            Caisse.total_argent = Caisse.total_argent + prixHT;
+            Caisse.total_TVA = Caisse.total_TVA + TVA;
+        }else{
+            Caisse.total_argent = Caisse.total_argent + (prixHT - prixHT*0.1);
+            Caisse.total_TVA= Caisse.total_TVA + (TVA - TVA*0.1);}
     }
 
 }

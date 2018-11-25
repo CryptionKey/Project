@@ -41,7 +41,7 @@ class Affichage {
         String clients = "\tk: Afficher la liste des clients\n";
         String enregistrer = "\te: Enregistrer la vente d'un produit sur la note d'un client.\n";
         String cloturer = "\tf: Clotûrer la note d'un client en affichant:\n\t\tle prix de chaque produit HT (hors-taxe),\n\t\tle prix total HT,\n\t\tla TVA(10%),\n\t\tle prix TTC.\n";
-        String donnees_comptables = "\tc: Afficher les données comptables:\n\t\ttotal des rentrés d'argent,\n\t\ttotal de la TVA facturée.\n";
+        String donnees_comptables = "\tc: Afficher les données comptables:\n\t\ttotal des rentrées d'argent,\n\t\ttotal de la TVA facturée.\n";
         String quitter = "\tq: Quitter le restaurant.\n";
         logger.info("OUTPUT",operations + produits + ajouter_produit + ouvrir_note + clients + enregistrer + cloturer + donnees_comptables + quitter);
     }

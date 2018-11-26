@@ -37,16 +37,16 @@ IntelliJ IDEA
 
 ## Organisation du programme
 ### __Classe Produits__
--représente les produits mis en vente
--comporte une liste d'objets "Aliments"
+- représente les produits mis en vente
+- comporte une liste d'objets "Aliments"
 
 ### __Classe Note__
--représente la note d'un client
--comporte une liste d'objets "Aliments" ainsi que le nom du client
+- représente la note d'un client
+- comporte une liste d'objets "Aliments" ainsi que le nom du client
 
 ### __Classe Clients__
--représente les clients présents dans le restaurant
--comporte une liste d'objets "Note"
+- représente les clients présents dans le restaurant
+- comporte une liste d'objets "Note"
 
 ## Difficultés rencontrées:
 ### __Gestion de multiples cas:__

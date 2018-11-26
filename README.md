@@ -36,13 +36,18 @@ IntelliJ IDEA
 - possibilité d'offrir une remise de 10% au moment de la clôture d'une note
 
 ## Organisation du programme
+
+### __Classe Aliment__
+- représente un produit
+- comporte les attributs "nom", "prix" et "quantité"
+
 ### __Classe Produits__
 - représente les produits mis en vente
-- comporte une liste d'objets "Aliments"
+- comporte une liste d'objets "Aliment"
 
 ### __Classe Note__
 - représente la note d'un client
-- comporte une liste d'objets "Aliments" ainsi que le nom du client
+- comporte une liste d'objets "Aliment" ainsi que le nom du client
 
 ### __Classe Clients__
 - représente les clients présents dans le restaurant

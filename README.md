@@ -15,7 +15,7 @@ Octobre-Novembre 2018
 - Markdown
 
 ## IDE utilisé :
-IntelliJ Idea
+IntelliJ IDEA
 
 ## Fonctionnalités:
 - afficher la liste des opérations disponibles
@@ -35,12 +35,25 @@ IntelliJ Idea
 - retrait automatique de la liste des produits en vente d'un produit en rupture de stock
 - possibilité d'offrir une remise de 10% au moment de la clôture d'une note
 
+## Organisation du programme
+### __Classe Produits__
+-représente les produits mis en vente
+-comporte une liste d'objets "Aliments"
+
+### __Classe Note__
+-représente la note d'un client
+-comporte une liste d'objets "Aliments" ainsi que le nom du client
+
+### __Classe Clients__
+-représente les clients présents dans le restaurant
+-comporte une liste d'objets "Note"
+
 ## Difficultés rencontrées:
 ### __Gestion de multiples cas:__
-- Vérifier qu'un client existe
-- Vérifier qu'un produit soit en vente
-- Vérifier qu'il y en a assez par rapport à la quantité demandée par un client
-- Vérifier si un client reprend d'un même produit, auquel cas il faut incrémenter la quantité du produit déjà présent sur sa note
+- Vérifier qu'un client existe bien lors de l'entrée du nom d'un client
+- Vérifier qu'un produit soit en vente lors de l'entrée du nom d'un produit
+- Vérifier qu'il y ait assez d'un produit par rapport à la quantité demandée par un client
+- Lorsqu'un client commande un produit : vérifier qu'il n'avait pas déjà commandé de ce produit, auquel cas il faut incrémenter la quantité du produit déjà présent sur sa note
 
 **Résolution :** création de plusieurs méthodes de vérification pour traiter ces différents cas
 

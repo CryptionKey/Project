@@ -26,7 +26,7 @@ public class Clients {
     public void creer_note(String nom_client) {
         Note note = new Note(nom_client);
         this.add(note);
-        logger.info("OUTPUT", "Nouvelle note créée\n");
+        logger.info("INPUT", "Nouvelle note créée pour le client "+nom_client+"\n");
     }
 
     //Verifier si un client se trouve déjà dans la liste

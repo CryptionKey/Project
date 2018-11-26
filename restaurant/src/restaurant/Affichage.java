@@ -31,7 +31,7 @@ class Affichage {
     static String input_prix = "\tPrix entré: ";
 
     static String output_choix = "\nQue voulez-vous faire? [o pour afficher les opérations possibles]: ";
-    static String input_choix = "Vous avez choisi l'option ";
+    static String input_choix = "\tOption choisie ";
 
     public void affichage_choix() {
         String operations = "\n\to: Afficher la liste des opérations disponibles.\n";

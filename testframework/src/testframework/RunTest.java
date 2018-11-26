@@ -3,6 +3,8 @@ package testframework;
 import logger.Logger;
 import logger.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class RunTest {
 
 

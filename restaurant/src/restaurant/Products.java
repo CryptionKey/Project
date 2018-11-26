@@ -1,5 +1,7 @@
 package restaurant;
 import java.util.LinkedList;
+import java.util.Scanner;
+
 import logger.Logger;
 import logger.LoggerFactory;
 
@@ -7,6 +9,7 @@ public class Products {
 
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private Logger logger = LoggerFactory.getLogger("product");
+    private static Scanner scan = new Scanner(System.in);
 
     public String toString() {
         return productList.toString();
@@ -69,7 +72,18 @@ public class Products {
             double prix = Affichage.verification_nombre("double", Affichage.output_prix, Affichage.input_prix);
             create_add(nom_aliment, quantite, prix);
         } else {
-            logger.info("OUTPUT", "\nCe produit existe déjà\n");}
+            logger.info("OUTPUT", "\nCe produit existe déjà\nSouhaitez-vous en augmenter le stock?[o : oui / n : non]");
+            String nom = scan.next();
+            if (nom.equals("o")){ aliment.setQuantite(augmenter_stock(aliment)); }
+        }
+    }
+
+
+    private int augmenter_stock(Aliment aliment){
+        int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);
+        quantite += aliment.getQuantite();
+        logger.info("INPUT","Nouvelle quantité :"+quantite+", de l'aliment :"+aliment.getNom() );
+        return quantite;
     }
 
 }

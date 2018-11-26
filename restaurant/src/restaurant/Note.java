@@ -5,12 +5,16 @@ import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
+
 public class Note {
 
     private String nom;
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private static Logger logger = LoggerFactory.getLogger("note");
     private static Scanner scan = new Scanner(System.in);
+
+    private java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
+
 
     //constructor
     public Note(String nom){ this.nom = nom.toLowerCase(); }
@@ -68,10 +72,11 @@ public class Note {
         afficherListe();
         double prixHT = prixHT(this.productList);
         String message = "Prix total hors-taxe : "+prixHT+" €\n";
-        double TVA = getTVA(prixHT);
-        message += "TVA : "+TVA+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
+        double TVA = (getTVA(prixHT)*100)/100;
+        message += "TVA : "+df.format(TVA)+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
         if(remise){//Si le vendeur a choisi de faire la remise de 10%
-            logger.info("OUTPUT",message+"Prix après remise : "+((TVA + prixHT)-(TVA + prixHT)*0.1)+" €\n");}
+            double prix =  (((TVA + prixHT)-(TVA + prixHT)*0.1)*100)/100;
+            logger.info("OUTPUT",message+"Prix après remise : "+df.format(prix)+" €\n");}
         else{logger.info("OUTPUT",message);} //s'il n'y a pas de remise
         Caisse.mise_a_jour_donnees_comptable(remise, prixHT, TVA);
     }

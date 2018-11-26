@@ -11,7 +11,6 @@ public class Test_TVA {
     private logger.Logger logger = LoggerFactory.getLogger("test_TVA");
     private Note note = new Note(nom);
 
-    public Test_TVA(){ this.nom = nom.toLowerCase(); }
 
 
     public void Test_get_TVA_entier(){

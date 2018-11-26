@@ -22,6 +22,5 @@ public class ContextualLogger implements Logger {
     public void error(String category, String message) {
         SimpleDateFormat logFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
         delegateLogger.error(category,"Date: "+logFormat.format(new Date()) + "      categorie du message: " + category +"        level: ERROR \nle message: "+message+"\n");
-
     }
 }

@@ -50,11 +50,11 @@ public class Caisse {
 
     static void mise_a_jour_donnees_comptable(boolean remise, double prixHT, double TVA){
         if(!remise){
-            Caisse.total_argent = Caisse.total_argent + prixHT +TVA;
+            Caisse.total_argent = Caisse.total_argent + prixHT; //+TVA?
             Caisse.total_TVA = Caisse.total_TVA + TVA;
         }else{
-            Caisse.total_argent = Caisse.total_argent + (prixHT - prixHT*0.1) +(TVA - TVA*0.1);
-            Caisse.total_TVA = Caisse.total_TVA + (TVA - TVA*0.1);}
+            Caisse.total_argent = Caisse.total_argent + (prixHT - prixHT*0.1); //+(TVA - TVA*0.1)?
+            Caisse.total_TVA= Caisse.total_TVA + (TVA - TVA*0.1);}
     }
 
 }

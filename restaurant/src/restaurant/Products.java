@@ -1,7 +1,6 @@
 package restaurant;
 import java.util.LinkedList;
 import java.util.Scanner;
-
 import logger.Logger;
 import logger.LoggerFactory;
 
@@ -77,7 +76,6 @@ public class Products {
             if (nom.equals("o")){ aliment.setQuantite(augmenter_stock(aliment)); }
         }
     }
-
 
     private int augmenter_stock(Aliment aliment){
         int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);

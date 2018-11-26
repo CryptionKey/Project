@@ -2,9 +2,7 @@
 
 import java.util.function.Predicate;
 
-
 public class FilteredLogger implements Logger {
-
 
     private Predicate<String> condition;
     private Logger delegate;
@@ -23,6 +21,5 @@ public class FilteredLogger implements Logger {
         if(condition.test(message))
             delegate.error(category, message);
     }
-
 }
 */

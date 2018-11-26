@@ -15,7 +15,6 @@ public class Note {
 
     private java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
 
-
     //constructor
     public Note(String nom){ this.nom = nom.toLowerCase(); }
 
@@ -72,10 +71,10 @@ public class Note {
         afficherListe();
         double prixHT = prixHT(this.productList);
         String message = "Prix total hors-taxe : "+prixHT+" €\n";
-        double TVA = (getTVA(prixHT)*100)/100;
+        double TVA = (getTVA(prixHT);
         message += "TVA : "+df.format(TVA)+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
         if(remise){//Si le vendeur a choisi de faire la remise de 10%
-            double prix =  (((TVA + prixHT)-(TVA + prixHT)*0.1)*100)/100;
+            double prix = ((TVA + prixHT)-(TVA + prixHT)*0.1);
             logger.info("OUTPUT",message+"Prix après remise : "+df.format(prix)+" €\n");}
         else{logger.info("OUTPUT",message);} //s'il n'y a pas de remise
         Caisse.mise_a_jour_donnees_comptable(remise, prixHT, TVA);

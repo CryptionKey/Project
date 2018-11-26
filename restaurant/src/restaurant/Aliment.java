@@ -18,7 +18,7 @@ class Aliment {
     public double getPrix(){ return prix; }
 
     public void setQuantite(int quantite) { this.quantite = quantite; }
-
+  
     //constructor
     Aliment(String nom, int quantite, double prix){
         this.quantite = quantite;

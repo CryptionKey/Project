@@ -70,9 +70,9 @@ public class Note {
         logger.info("OUTPUT", "\nPrix de chaque produit hors-taxe :\n");
         afficherListe();
         double prixHT = prixHT(this.productList);
-        String message = "Prix total hors-taxe : "+prixHT+" €\n";
-        double TVA = (getTVA(prixHT);
-        message += "TVA : "+df.format(TVA)+" €\nPrix taxes comprises : "+(TVA + prixHT)+" €\n";
+        String message = "Prix total hors-taxe : "+df.format(prixHT)+" €\n";
+        double TVA = getTVA(prixHT);
+        message += "TVA : "+df.format(TVA)+" €\nPrix taxes comprises : "+df.format(TVA + prixHT)+" €\n";
         if(remise){//Si le vendeur a choisi de faire la remise de 10%
             double prix = ((TVA + prixHT)-(TVA + prixHT)*0.1);
             logger.info("OUTPUT",message+"Prix après remise : "+df.format(prix)+" €\n");}

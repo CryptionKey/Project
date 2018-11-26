@@ -4,7 +4,7 @@ import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
-public class Products {
+public class Produits {
 
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private Logger logger = LoggerFactory.getLogger("product");

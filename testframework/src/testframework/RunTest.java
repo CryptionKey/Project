@@ -13,9 +13,9 @@ public class RunTest {
 
     public static void main(String[] args) {
         System.out.println("TESTS");
-        test_tva.Test_get_TVA_decimal();
-        test_tva.Test_get_TVA_entier();
-        test_tva.Test_get_TVA_nul();
+        //test_tva.Test_get_TVA_decimal();
+        test_tva.Test_get_TVA_entier(2425.68, 242.57);
+        //test_tva.Test_get_TVA_nul();
     }
 
 }

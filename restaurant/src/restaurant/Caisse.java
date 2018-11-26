@@ -20,14 +20,14 @@ public class Caisse {
             note_client.afficherListe(); }
     }
 
-    public void enregistrer(Clients clients, Products products){
+    public void enregistrer(Clients clients, Produits produits){
         String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_facturer, Affichage.input_nom_client_facturer);
         Note note_client = clients.verification_client_existant(nom_client, true);
         if(note_client != null) {
             String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_facturer, Affichage.input_nom_aliment_facturer);
-            Aliment aliment_demande = products.verification_aliment_existant(nom_aliment, true);
+            Aliment aliment_demande = produits.verification_aliment_existant(nom_aliment, true);
             if(aliment_demande != null) {
-                int quantite = clients.selection_quantite(aliment_demande, products);
+                int quantite = clients.selection_quantite(aliment_demande, produits);
                 if(quantite != -1){
                     Aliment aliment_ajoute = new Aliment(aliment_demande.getNom(), quantite, aliment_demande.getPrix());
                     clients.getNoteList().get(clients.getIndexNote(note_client.getNom())).getProductList().add(aliment_ajoute); } } }

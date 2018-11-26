@@ -52,27 +52,27 @@ public class Clients {
         return index;
     }
 
-    private boolean verification_stock(int quantite, int index_aliment, Products products){
+    private boolean verification_stock(int quantite, int index_aliment, Produits produits){
         boolean stock = true; //assez de stock par défaut
-        if(quantite>products.getProductList().get(index_aliment).getQuantite()){
+        if(quantite> produits.getProductList().get(index_aliment).getQuantite()){
             logger.error("OUTPUT", "Il n'y en a pas assez en stock\n");
             stock=false; }
         return stock;
     }
 
-    private void mise_a_jour_stock(int index_aliment, int quantite, Aliment aliment_demande, Products products){
-        int nouveau_stock = (products.getProductList().get(index_aliment).getQuantite())-quantite;
+    private void mise_a_jour_stock(int index_aliment, int quantite, Aliment aliment_demande, Produits produits){
+        int nouveau_stock = (produits.getProductList().get(index_aliment).getQuantite())-quantite;
         if(!"café".equals(aliment_demande.getNom())){
-            products.getProductList().get(index_aliment).setQuantite(nouveau_stock);
-            if(products.getProductList().get(index_aliment).getQuantite()==0){
-                products.getProductList().remove(products.getProductList().get(index_aliment)); } }
+            produits.getProductList().get(index_aliment).setQuantite(nouveau_stock);
+            if(produits.getProductList().get(index_aliment).getQuantite()==0){
+                produits.getProductList().remove(produits.getProductList().get(index_aliment)); } }
     }
 
-    public int selection_quantite(Aliment aliment_demande, Products products){
+    public int selection_quantite(Aliment aliment_demande, Produits produits){
         double quantite = Affichage.verification_nombre("entier",Affichage.output_quantite, Affichage.input_quantite);
-        int index_aliment = products.getIndexAliment(aliment_demande.getNom());
-        if(verification_stock((int)quantite, index_aliment, products)) {
-            mise_a_jour_stock(index_aliment, (int)quantite, aliment_demande, products); }
+        int index_aliment = produits.getIndexAliment(aliment_demande.getNom());
+        if(verification_stock((int)quantite, index_aliment, produits)) {
+            mise_a_jour_stock(index_aliment, (int)quantite, aliment_demande, produits); }
         else{ quantite = -1; }
         return (int)quantite;
     }

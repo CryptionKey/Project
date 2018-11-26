@@ -31,9 +31,9 @@ class Affichage {
     static String input_prix = "\tPrix entré: ";
 
     static String output_choix = "\nQue voulez-vous faire? [o pour afficher les opérations possibles]: ";
-    static String input_choix = "Vous avez choisi l'option ";
+    static String input_choix = "\tOption choisie ";
 
-    void affichage_choix() {
+    public void affichage_choix() {
         String operations = "\n\to: Afficher la liste des opérations disponibles.\n";
         String produits = "\tp: Afficher la liste des produits à la vente.\n";
         String ajouter_produit = "\ta: Ajouter un produit à la vente.\n";
@@ -50,7 +50,7 @@ class Affichage {
         logger.info("INPUT", chaine_in + nom + ".\n");
     }
 
-    static String choix_chaine(String chaine_out, String chaine_in) {
+    public static String choix_chaine(String chaine_out, String chaine_in) {
         logger.info("OUTPUT", chaine_out);
         String nom = scan.next();
         chaine_input(chaine_in, nom);
@@ -58,14 +58,14 @@ class Affichage {
     }
 
     //Tester ce que rentre l'utilisateur lorsqu'on attend un nombre
-    static double verification_nombre(String type, String chaine_out, String chaine_in) {
+    public static double verification_nombre(String type, String chaine_out, String chaine_in) {
         double choix = 0 ;
         String nombre;
         do {
             nombre = choix_chaine(chaine_out, chaine_in);
             try {
-                if(type == "double"){choix = Double.parseDouble(nombre);}
-                if(type == "entier"){choix = Integer.parseInt(nombre);}
+                if(type.equals("double")){choix = Double.parseDouble(nombre);}
+                if(type.equals("entier")){choix = Integer.parseInt(nombre);}
                 if (choix <= 0)   throw new Exception();
             } catch (Exception e) {
                 logger.error("OUTPUT"," Veuillez entrer un nombre positif! ");

@@ -10,10 +10,10 @@ public class Clients {
 
     public String toString() {return noteList.toString();}
 
-    LinkedList<Note> getNoteList() { return noteList; }
+    public LinkedList<Note> getNoteList() { return noteList; }
 
     //Afficher la liste des notes de client
-    void afficherListe() {
+    public void afficherListe() {
         if (this.getNoteList().size() != 0) {
             logger.info("OUTPUT", "Les clients actuellement dans le restaurant sont:\n");
             for (Note note : this.noteList) {
@@ -23,14 +23,14 @@ public class Clients {
     //Ajouter une note à la liste des clients
     private void add(Note note) {noteList.add(note);}
 
-    void creer_note(String nom_client) {
+    public void creer_note(String nom_client) {
         Note note = new Note(nom_client);
         this.add(note);
-        logger.info("OUTPUT", "Nouvelle note créée\n");
+        logger.info("INPUT", "Nouvelle note créée pour le client "+nom_client+"\n");
     }
 
     //Verifier si un client se trouve déjà dans la liste
-    Note verification_client_existant(String nom_client, boolean afficher_message){
+    public Note verification_client_existant(String nom_client, boolean afficher_message){
         Note note_client = null; /*le client n'existe pas par défault*/
         for (Note note_courante : noteList) {
             if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){
@@ -43,7 +43,7 @@ public class Clients {
     }
 
     //Récupérer l'index de la note demandée
-    int getIndexNote(String nom_client){
+    public int getIndexNote(String nom_client){
         int compteur = 0, index=0;
         for (Note note_courante : noteList) {
             if(note_courante.getNom().toLowerCase().compareTo(nom_client.toLowerCase())==0){ index=compteur;}//si les chaînes sont identiques, le client existe
@@ -68,7 +68,7 @@ public class Clients {
                 products.getProductList().remove(products.getProductList().get(index_aliment)); } }
     }
 
-    int selection_quantite(Aliment aliment_demande, Products products){
+    public int selection_quantite(Aliment aliment_demande, Products products){
         double quantite = Affichage.verification_nombre("entier",Affichage.output_quantite, Affichage.input_quantite);
         int index_aliment = products.getIndexAliment(aliment_demande.getNom());
         if(verification_stock((int)quantite, index_aliment, products)) {

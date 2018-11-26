@@ -1,8 +1,7 @@
-#!bash/bin
+#!/bin/bash
 
-Explication Output/Input/Program
+ echo "Compilation tests"
+javac -cp restaurant/bin:logger/bin -d testframework/bin testframework/src/testframework*.java
+ echo "Fin Compilation tests"
 
-Entre public et private d'apres l'IDE
-
-
-//java -cp restaurant/bin:logger/bin:testframework/bin test.RunTest test.TVATest test.TTCTest
+java -cp restaurant/bin:logger/bin:testframework/bin testframework.RunTest

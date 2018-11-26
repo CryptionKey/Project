@@ -5,11 +5,12 @@ import logger.LoggerFactory;
 
 public class Caisse {
 
+    private java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
     private Logger logger = LoggerFactory.getLogger("caisse");
-    private static double total_TVA=0;
-    private static double total_argent=0;
+    private static double total_TVA = 0;
+    private static double total_argent = 0;
 
-    void ouvrir_note(Clients clients){
+    public void ouvrir_note(Clients clients){
         clients.afficherListe();
         String nom_client = Affichage.choix_chaine(Affichage.output_note_client_ouvrir, Affichage.input_note_client_ouvrir);
         Note note_client = clients.verification_client_existant(nom_client, false);
@@ -19,7 +20,7 @@ public class Caisse {
             note_client.afficherListe(); }
     }
 
-    void enregistrer(Clients clients, Products products){
+    public void enregistrer(Clients clients, Products products){
         String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_facturer, Affichage.input_nom_client_facturer);
         Note note_client = clients.verification_client_existant(nom_client, true);
         if(note_client != null) {
@@ -32,7 +33,7 @@ public class Caisse {
                     clients.getNoteList().get(clients.getIndexNote(note_client.getNom())).getProductList().add(aliment_ajoute); } } }
     }
 
-    void cloturer(Clients clients){
+    public void cloturer(Clients clients){
         String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_cloturer, Affichage.input_nom_client_cloturer);
         Note note_client = clients.verification_client_existant(nom_client, true);
         if(note_client!=null) {
@@ -42,17 +43,17 @@ public class Caisse {
             clients.getNoteList().remove(clients.getNoteList().get(index_note)); }
     }
 
-    void donnees_comptable(){
-        logger.info("OUTPUT","Total des rentrées d'argent: "+total_argent+"\n");
-        logger.info("OUTPUT","Total de la TVA facturée: "+total_TVA+"\n");
+    public void donnees_comptable(){
+        logger.info("OUTPUT", String.format("Total des rentrées d'argent: %s\n", df.format(total_argent)));
+        logger.info("OUTPUT", String.format("Total de la TVA facturée: %s\n", df.format(total_TVA)));
     }
 
     static void mise_a_jour_donnees_comptable(boolean remise, double prixHT, double TVA){
         if(!remise){
-            Caisse.total_argent = Caisse.total_argent + prixHT;
+            Caisse.total_argent = Caisse.total_argent + prixHT; //+TVA?
             Caisse.total_TVA = Caisse.total_TVA + TVA;
         }else{
-            Caisse.total_argent = Caisse.total_argent + (prixHT - prixHT*0.1);
+            Caisse.total_argent = Caisse.total_argent + (prixHT - prixHT*0.1); //+(TVA - TVA*0.1)?
             Caisse.total_TVA= Caisse.total_TVA + (TVA - TVA*0.1);}
     }
 

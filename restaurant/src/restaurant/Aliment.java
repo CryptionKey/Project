@@ -13,12 +13,12 @@ class Aliment {
     }
 
     //getters
-    String getNom(){return nom; }
-    int getQuantite(){ return quantite; }
-    double getPrix(){ return prix; }
+    public String getNom(){return nom; }
+    public int getQuantite(){ return quantite; }
+    public double getPrix(){ return prix; }
 
-    void setQuantite(int quantite) { this.quantite = quantite; }
-
+    public void setQuantite(int quantite) { this.quantite = quantite; }
+  
     //constructor
     Aliment(String nom, int quantite, double prix){
         this.quantite = quantite;

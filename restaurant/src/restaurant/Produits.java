@@ -1,14 +1,12 @@
 package restaurant;
 import java.util.LinkedList;
-import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
 public class Produits {
 
     private final LinkedList<Aliment> productList = new LinkedList<>();
-    private Logger logger = LoggerFactory.getLogger("product");
-    private static Scanner scan = new Scanner(System.in);
+    private static Logger logger = LoggerFactory.getLogger("product");
 
     public String toString() {
         return productList.toString();
@@ -43,7 +41,7 @@ public class Produits {
         create_add("café", (int)inf, 2);
     }
 
-    public Aliment verification_aliment_existant(String nom_aliment, boolean afficher_message){
+    public static Aliment verification_aliment_existant(String nom_aliment, boolean afficher_message, LinkedList<Aliment> productList){
         Aliment aliment = null; /*l'aliment n'existe pas par défault*/
         for (Aliment aliment_courant : productList) {
             if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){
@@ -54,7 +52,7 @@ public class Produits {
         return aliment;
     }
 
-    public int getIndexAliment(String nom_aliment){
+    public static int getIndexAliment(String nom_aliment, LinkedList<Aliment> productList){
         int compteur = 0, index=0;
         for (Aliment aliment_courant : productList) {
             if(aliment_courant.getNom().toLowerCase().compareTo(nom_aliment.toLowerCase())==0){index=compteur;}
@@ -65,15 +63,14 @@ public class Produits {
 
     public void ajouter_produit(){
         String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_ajouter, Affichage.input_nom_aliment_ajouter);
-        Aliment aliment = verification_aliment_existant(nom_aliment, false);
+        Aliment aliment = verification_aliment_existant(nom_aliment, false, productList);
         if(aliment==null) { //si l'aliment n'existe pas
             int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);
             double prix = Affichage.verification_nombre("double", Affichage.output_prix, Affichage.input_prix);
             create_add(nom_aliment, quantite, prix);
-        } else {
-            logger.info("OUTPUT", "\nCe produit existe déjà\nSouhaitez-vous en augmenter le stock?[o : oui / n : non]");
-            String nom = scan.next();
-            if (nom.equals("o")){ aliment.setQuantite(augmenter_stock(aliment)); }
+        } else { //si l'aliment existe déjà
+            String stock = Affichage.choix_chaine(Affichage.output_produit_existant, Affichage.input_reponse);
+            if (stock.equals("o")){ aliment.setQuantite(augmenter_stock(aliment)); }
         }
     }
 

@@ -17,7 +17,9 @@ public class Clients {
         if (this.getNoteList().size() != 0) {
             logger.info("OUTPUT", "Les clients actuellement dans le restaurant sont:\n");
             for (Note note : this.noteList) {
-                logger.info("OUTPUT", "\t" + note.getNom() + "\n"); } }
+                logger.info("OUTPUT", "\t" + note.getNom() + "\n");
+            }
+        }else{ logger.info("OUTPUT","Il n'y a aucun client dans le restaurant\n");}
     }
 
     //Ajouter une note à la liste des clients
@@ -70,7 +72,7 @@ public class Clients {
 
     public int selection_quantite(Aliment aliment_demande, Produits produits){
         double quantite = Affichage.verification_nombre("entier",Affichage.output_quantite, Affichage.input_quantite);
-        int index_aliment = produits.getIndexAliment(aliment_demande.getNom());
+        int index_aliment = Produits.getIndexAliment(aliment_demande.getNom(), produits.getProductList());
         if(verification_stock((int)quantite, index_aliment, produits)) {
             mise_a_jour_stock(index_aliment, (int)quantite, aliment_demande, produits); }
         else{ quantite = -1; }

@@ -1,7 +1,6 @@
 package restaurant;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
@@ -11,7 +10,6 @@ public class Note {
     private String nom;
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private static Logger logger = LoggerFactory.getLogger("note");
-    private static Scanner scan = new Scanner(System.in);
 
     private java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
 
@@ -26,6 +24,15 @@ public class Note {
 
     public String toString(){ return ""+nom+":\n"+productList.toString()+""; }
 
+    public void ajouter_aliment(Aliment aliment_demande, int quantite){
+        Aliment aliment_verifie = Produits.verification_aliment_existant(aliment_demande.getNom(), false, productList);
+        if(aliment_verifie != null){ //l'aliment existe déjà dans la note du client
+            productList.get(Produits.getIndexAliment(aliment_verifie.getNom() , productList)).setQuantite(aliment_verifie.getQuantite()+quantite);
+        }else{ //l'aliment n'existe pas encore dans la note du client
+            Aliment aliment_ajoute = new Aliment(aliment_demande.getNom(), quantite, aliment_demande.getPrix());
+            productList.add(aliment_ajoute); }
+    }
+
     //Afficher la liste d'aliments de la note
     public void afficherListe(){
         if(this.getProductList().size()!=0) {
@@ -35,7 +42,7 @@ public class Note {
                 message += "\t" + aliment + "\n";//Chaque aliment de la liste est ajouté au message
             }
             logger.info("OUTPUT", message); //On affiche le message entier
-        } else{ logger.error("OUTPUT","Cette note ne contient encore aucun produit.\n");}
+        } else { logger.error("OUTPUT","Cette note ne contient aucun produit.\n");}
     }
 
     //Demander si on veut offrir une remise
@@ -43,9 +50,7 @@ public class Note {
         boolean remise = false;
         String choix;
         do {
-            logger.info("OUTPUT", "Souhaitez-vous offrir une remise de 10% à ce client? [o : oui / n : non]");
-            choix = scan.next();
-            logger.info("INPUT","Choix: "+choix+".\n");
+            choix = Affichage.choix_chaine(Affichage.output_remise, Affichage.input_reponse);
         }while(!"o".equals(choix) && !"n".equals(choix));
         if("o".equals(choix)){ remise = true;}
         return remise;
@@ -67,7 +72,7 @@ public class Note {
 
     //Afficher les produits enregistrés, total HT, TVA; total TTC
     public void afficher_facture(boolean remise){
-        logger.info("OUTPUT", "\nPrix de chaque produit hors-taxe :\n");
+        if(productList.size() != 0){logger.info("OUTPUT", "\nPrix de chaque produit hors-taxe :\n");}
         afficherListe();
         double prixHT = prixHT(this.productList);
         String message = "Prix total hors-taxe : "+df.format(prixHT)+" €\n";

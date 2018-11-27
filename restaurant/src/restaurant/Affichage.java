@@ -33,6 +33,10 @@ class Affichage {
     static String output_choix = "\nQue voulez-vous faire? [o pour afficher les opérations possibles]: ";
     static String input_choix = "\tOption choisie ";
 
+    static String output_produit_existant = "\nCe produit existe déjà\nSouhaitez-vous en augmenter le stock?[o : oui / n : non]";
+    static String output_remise = "\nSouhaitez-vous offrir une remise de 10% à ce client? [o : oui / n : non]";
+    static String input_reponse = "\tChoix: ";
+
     public void affichage_choix() {
         String operations = "\n\to: Afficher la liste des opérations disponibles.\n";
         String produits = "\tp: Afficher la liste des produits à la vente.\n";

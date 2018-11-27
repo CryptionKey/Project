@@ -18,6 +18,7 @@ public class Produits {
     //Afficher la liste des aliments
     public void afficherListe(){
         StringBuilder liste = new StringBuilder("\n");
+        logger.info("OUTPUT","\nLes produits en vente sont:");
         for (Aliment aliment : this.productList) { liste.append("\t").append(aliment).append("\n");  }
         logger.info("OUTPUT", liste+"\n");
     }

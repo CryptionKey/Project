@@ -1,4 +1,5 @@
 package restaurant;
+
 import java.util.LinkedList;
 import logger.Logger;
 import logger.LoggerFactory;
@@ -6,7 +7,7 @@ import logger.LoggerFactory;
 public class Produits {
 
     private final LinkedList<Aliment> productList = new LinkedList<>();
-    private static Logger logger = LoggerFactory.getLogger("product");
+    private static Logger logger = LoggerFactory.getLogger("produit");
 
     public String toString() {
         return productList.toString();
@@ -41,6 +42,7 @@ public class Produits {
         create_add("café", (int)inf, 2);
     }
 
+
     public static Aliment verification_aliment_existant(String nom_aliment, boolean afficher_message, LinkedList<Aliment> productList){
         Aliment aliment = null; /*l'aliment n'existe pas par défault*/
         for (Aliment aliment_courant : productList) {
@@ -52,6 +54,7 @@ public class Produits {
         return aliment;
     }
 
+
     public static int getIndexAliment(String nom_aliment, LinkedList<Aliment> productList){
         int compteur = 0, index=0;
         for (Aliment aliment_courant : productList) {
@@ -61,6 +64,7 @@ public class Produits {
         return index;
     }
 
+  
     public void ajouter_produit(){
         String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_ajouter, Affichage.input_nom_aliment_ajouter);
         Aliment aliment = verification_aliment_existant(nom_aliment, false, productList);
@@ -74,6 +78,7 @@ public class Produits {
         }
     }
 
+  
     private int augmenter_stock(Aliment aliment){
         int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);
         quantite += aliment.getQuantite();

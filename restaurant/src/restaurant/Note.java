@@ -4,17 +4,18 @@ import java.util.LinkedList;
 import logger.Logger;
 import logger.LoggerFactory;
 
-
 public class Note {
 
     private String nom;
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private static Logger logger = LoggerFactory.getLogger("note");
 
-    private java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");
+    private java.text.DecimalFormat df = new java.text.DecimalFormat("0.##");//pour ne garder que 2 chiffre de décimal
 
     //constructor
     public Note(String nom){ this.nom = nom.toLowerCase(); }
+
+    public String toString(){ return ""+nom+":\n"+productList.toString()+""; }
 
     //Pour retourner la liste
     public LinkedList<Aliment> getProductList() {return productList;}
@@ -22,8 +23,7 @@ public class Note {
     //Pour récupérer le nom.
     public String getNom(){ return nom; }
 
-    public String toString(){ return ""+nom+":\n"+productList.toString()+""; }
-
+  
     public void ajouter_aliment(Aliment aliment_demande, int quantite){
         Aliment aliment_verifie = Produits.verification_aliment_existant(aliment_demande.getNom(), false, productList);
         if(aliment_verifie != null){ //l'aliment existe déjà dans la note du client
@@ -33,28 +33,31 @@ public class Note {
             productList.add(aliment_ajoute); }
     }
 
+  
     //Afficher la liste d'aliments de la note
     public void afficherListe(){
-        if(this.getProductList().size()!=0) {
+        if(this.getProductList().size()!=0) {//si la liste n'est pas vide
             logger.info("OUTPUT", "Voici la note demandée:\n");
-            String message = "";//initilisation du message qui sera affiché
+            StringBuilder message = new StringBuilder();//initilisation du message qui sera affiché
             for (Aliment aliment : this.productList) {
-                message += "\t" + aliment + "\n";//Chaque aliment de la liste est ajouté au message
+                message.append("\t").append(aliment).append("\n");//Chaque aliment de la liste est ajouté au message
             }
-            logger.info("OUTPUT", message); //On affiche le message entier
-        } else { logger.error("OUTPUT","Cette note ne contient aucun produit.\n");}
+            logger.info("OUTPUT", message.toString()); //On affiche le message entier
+        } else{ logger.error("OUTPUT","Cette note ne contient aucun produit.\n");}
     }
 
-    //Demander si on veut offrir une remise
+
+    //Demander si on veut offrir une remise au client
     public static boolean demander_remise(){
-        boolean remise = false;
+        boolean remise = false;//faux par défaut
         String choix;
         do {
             choix = Affichage.choix_chaine(Affichage.output_remise, Affichage.input_reponse);
         }while(!"o".equals(choix) && !"n".equals(choix));
-        if("o".equals(choix)){ remise = true;}
+        if("o".equals(choix)) remise = true;
         return remise;
     }
+
 
     //Calculer le prix total HT, c'est le prix affiché dans le menu
     private double prixHT(LinkedList<Aliment> productList){
@@ -65,10 +68,12 @@ public class Note {
         return total;
     }
 
+
     //Appliquer la TVA
     public double getTVA(double prixHT){
         return prixHT*0.1; //La TVA est fixé à 10%
     }
+
 
     //Afficher les produits enregistrés, total HT, TVA; total TTC
     public void afficher_facture(boolean remise){

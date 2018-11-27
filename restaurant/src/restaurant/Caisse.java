@@ -10,16 +10,19 @@ public class Caisse {
     private static double total_TVA = 0;
     private static double total_argent = 0;
 
+
+    //A l'arrivée des clients dans le restaurant, on ouvre une note
     public void ouvrir_note(Clients clients){
-        clients.afficherListe();
+        clients.afficherListe();//clients déjà présents
         String nom_client = Affichage.choix_chaine(Affichage.output_note_client_ouvrir, Affichage.input_note_client_ouvrir);
         Note note_client = clients.verification_client_existant(nom_client, false);
-        if(note_client == null) {
+        if(note_client == null) {//s'il s'agit d'un nouvrau client, on lui crée une note
             clients.creer_note(nom_client);
-        } else {
-            note_client.afficherListe(); }
+        } else  note_client.afficherListe();
     }
 
+  
+    //Lors d'une commande d'un client
     public void enregistrer(Clients clients, Produits produits){
         clients.afficherListe();
         if(clients.getNoteList().size()!=0){
@@ -33,7 +36,9 @@ public class Caisse {
                     if(quantite != -1){
                         clients.getNoteList().get(clients.getIndexNote(note_client.getNom())).ajouter_aliment(aliment_demande, quantite); } } } }
     }
+  
 
+    //Lorsqu'un client s'en va
     public void cloturer(Clients clients){
         clients.afficherListe();
         if(clients.getNoteList().size()!=0){
@@ -47,13 +52,17 @@ public class Caisse {
                 clients.getNoteList().remove(clients.getNoteList().get(index_note)); } }
     }
 
+
+    //Affichage des comptes (fin de journée)
     public void donnees_comptable(){
         logger.info("OUTPUT", String.format("Total des rentrées d'argent: %s €\n", df.format(total_argent)));
         logger.info("OUTPUT", String.format("Total de la TVA facturée: %s €\n", df.format(total_TVA)));
     }
 
+
+    //Mettre à jour les comptes après cloture d'une note d'un client
     static void mise_a_jour_donnees_comptable(boolean remise, double prixHT, double TVA){
-        if(!remise){
+        if(!remise){//sans remise
             Caisse.total_argent = Caisse.total_argent + prixHT; //+TVA?
             Caisse.total_TVA = Caisse.total_TVA + TVA;
         }else{

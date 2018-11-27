@@ -1,6 +1,6 @@
 package restaurant;
 
-class Aliment {
+public class Aliment {
 
     private String nom;
     private int quantite;
@@ -18,9 +18,9 @@ class Aliment {
     public double getPrix(){ return prix; }
 
     public void setQuantite(int quantite) { this.quantite = quantite; }
-  
+
     //constructor
-    Aliment(String nom, int quantite, double prix){
+    public Aliment(String nom, int quantite, double prix){
         this.quantite = quantite;
         this.nom = nom;
         this.prix = prix;

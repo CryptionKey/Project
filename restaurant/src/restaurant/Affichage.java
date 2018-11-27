@@ -4,7 +4,7 @@ import logger.Logger;
 import logger.LoggerFactory;
 import java.util.Scanner;
 
-class Affichage {
+public class Affichage {
 
     private static Logger logger = LoggerFactory.getLogger("Affichage");
     private static Scanner scan = new Scanner(System.in);
@@ -32,7 +32,9 @@ class Affichage {
 
     static String output_choix = "\nQue voulez-vous faire? [o pour afficher les opérations possibles]: ";
     static String input_choix = "\tOption choisie ";
+  
 
+    //Affichage du menu
     static String output_produit_existant = "\nCe produit existe déjà\nSouhaitez-vous en augmenter le stock?[o : oui / n : non]";
     static String output_remise = "\nSouhaitez-vous offrir une remise de 10% à ce client? [o : oui / n : non]";
     static String input_reponse = "\tChoix: ";
@@ -50,9 +52,11 @@ class Affichage {
         logger.info("OUTPUT",operations + produits + ajouter_produit + ouvrir_note + clients + enregistrer + cloturer + donnees_comptables + quitter);
     }
 
+
     private static void chaine_input(String chaine_in, String nom){
         logger.info("INPUT", chaine_in + nom + ".\n");
     }
+
 
     public static String choix_chaine(String chaine_out, String chaine_in) {
         logger.info("OUTPUT", chaine_out);
@@ -60,6 +64,7 @@ class Affichage {
         chaine_input(chaine_in, nom);
         return nom;
     }
+
 
     //Tester ce que rentre l'utilisateur lorsqu'on attend un nombre
     public static double verification_nombre(String type, String chaine_out, String chaine_in) {

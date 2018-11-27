@@ -1,6 +1,8 @@
 package restaurant;
+
 import logger.Logger;
 import logger.LoggerFactory;
+
 
 class Main {
 
@@ -9,6 +11,7 @@ class Main {
     private static Affichage affichage = new Affichage();
     private static Produits produits = new Produits();
     private static Caisse caisse = new Caisse();
+
 
     //Fonction regroupant les opérations disponibles depuis le menu
     private static boolean actions(String choice, boolean continuer, Produits produits){
@@ -26,6 +29,8 @@ class Main {
         return continuer;
     }
 
+
+    //Le Main
     public static void main(String[] args) {
         logger.info("OUTPUT","\nBienvenue dans notre restaurant de Bagels!!\n");
         boolean continuer = false;//reste faux tant que l'utilisateur ne rentre pas "q"

@@ -1,10 +1,11 @@
 package restaurant;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 import logger.Logger;
 import logger.LoggerFactory;
 
-public class Products {
+public class Produits {
 
     private final LinkedList<Aliment> productList = new LinkedList<>();
     private Logger logger = LoggerFactory.getLogger("product");
@@ -24,7 +25,7 @@ public class Products {
     }
 
     //Ajouter un aliment à la vente
-    private void add (Aliment aliment){
+    public void add (Aliment aliment){
         productList.add(aliment);
     }
 
@@ -77,7 +78,7 @@ public class Products {
         }
     }
 
-    private int augmenter_stock(Aliment aliment){
+    public int augmenter_stock(Aliment aliment){
         int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);
         quantite += aliment.getQuantite();
         logger.info("INPUT","Nouvelle quantité :"+quantite+", de l'aliment :"+aliment.getNom() );

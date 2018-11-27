@@ -10,46 +10,55 @@ public class Caisse {
     private static double total_TVA = 0;
     private static double total_argent = 0;
 
+
+    //A l'arrivée des clients dans le restaurant, on ouvre une note
     public void ouvrir_note(Clients clients){
-        clients.afficherListe();
+        clients.afficherListe();//clients déjà présents
         String nom_client = Affichage.choix_chaine(Affichage.output_note_client_ouvrir, Affichage.input_note_client_ouvrir);
         Note note_client = clients.verification_client_existant(nom_client, false);
-        if(note_client == null) {
+        if(note_client == null) {//s'il s'agit d'un nouvrau client, on lui crée une note
             clients.creer_note(nom_client);
-        } else {
-            note_client.afficherListe(); }
+        } else  note_client.afficherListe();
     }
 
-    public void enregistrer(Clients clients, Products products){
+
+    //Lors d'une commande d'un client
+    public void enregistrer(Clients clients, Produits produits){
         String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_facturer, Affichage.input_nom_client_facturer);
         Note note_client = clients.verification_client_existant(nom_client, true);
         if(note_client != null) {
             String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_facturer, Affichage.input_nom_aliment_facturer);
-            Aliment aliment_demande = products.verification_aliment_existant(nom_aliment, true);
+            Aliment aliment_demande = produits.verification_aliment_existant(nom_aliment, true);
             if(aliment_demande != null) {
-                int quantite = clients.selection_quantite(aliment_demande, products);
+                int quantite = clients.selection_quantite(aliment_demande, produits);
                 if(quantite != -1){
                     Aliment aliment_ajoute = new Aliment(aliment_demande.getNom(), quantite, aliment_demande.getPrix());
                     clients.getNoteList().get(clients.getIndexNote(note_client.getNom())).getProductList().add(aliment_ajoute); } } }
     }
 
+
+    //Lorsqu'un client s'en va
     public void cloturer(Clients clients){
         String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_cloturer, Affichage.input_nom_client_cloturer);
         Note note_client = clients.verification_client_existant(nom_client, true);
-        if(note_client!=null) {
+        if(note_client!=null) { //le client existe bien
             int index_note = clients.getIndexNote(nom_client);
-            boolean remise = Note.demander_remise();
+            boolean remise = Note.demander_remise();//on peut alors lui offrir une remise
             clients.getNoteList().get(index_note).afficher_facture(remise);
             clients.getNoteList().remove(clients.getNoteList().get(index_note)); }
     }
 
+
+    //Affichage des comptes (fin de journée)
     public void donnees_comptable(){
         logger.info("OUTPUT", String.format("Total des rentrées d'argent: %s\n", df.format(total_argent)));
         logger.info("OUTPUT", String.format("Total de la TVA facturée: %s\n", df.format(total_TVA)));
     }
 
+
+    //Mettre à jour les comptes après cloture d'une note d'un client
     static void mise_a_jour_donnees_comptable(boolean remise, double prixHT, double TVA){
-        if(!remise){
+        if(!remise){//sans remise
             Caisse.total_argent = Caisse.total_argent + prixHT; //+TVA?
             Caisse.total_TVA = Caisse.total_TVA + TVA;
         }else{

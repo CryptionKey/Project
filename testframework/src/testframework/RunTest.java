@@ -22,7 +22,6 @@ public class RunTest {
         test_produit.test_getIndexAliment();
         //test_produit.test_augmenter_stock(burger);
         test_produit.test_verif_aliment();
-
     }
 
 }

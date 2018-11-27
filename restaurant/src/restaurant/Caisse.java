@@ -21,38 +21,42 @@ public class Caisse {
         } else  note_client.afficherListe();
     }
 
-
+  
     //Lors d'une commande d'un client
     public void enregistrer(Clients clients, Produits produits){
-        String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_facturer, Affichage.input_nom_client_facturer);
-        Note note_client = clients.verification_client_existant(nom_client, true);
-        if(note_client != null) {
-            String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_facturer, Affichage.input_nom_aliment_facturer);
-            Aliment aliment_demande = produits.verification_aliment_existant(nom_aliment, true);
-            if(aliment_demande != null) {
-                int quantite = clients.selection_quantite(aliment_demande, produits);
-                if(quantite != -1){
-                    Aliment aliment_ajoute = new Aliment(aliment_demande.getNom(), quantite, aliment_demande.getPrix());
-                    clients.getNoteList().get(clients.getIndexNote(note_client.getNom())).getProductList().add(aliment_ajoute); } } }
+        clients.afficherListe();
+        if(clients.getNoteList().size()!=0){
+            String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_facturer, Affichage.input_nom_client_facturer);
+            Note note_client = clients.verification_client_existant(nom_client, true);
+            if(note_client != null) {
+                String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_facturer, Affichage.input_nom_aliment_facturer);
+                Aliment aliment_demande = Produits.verification_aliment_existant(nom_aliment, true, produits.getProductList());
+                if(aliment_demande != null) {
+                    int quantite = clients.selection_quantite(aliment_demande, produits);
+                    if(quantite != -1){
+                        clients.getNoteList().get(clients.getIndexNote(note_client.getNom())).ajouter_aliment(aliment_demande, quantite); } } } }
     }
-
+  
 
     //Lorsqu'un client s'en va
     public void cloturer(Clients clients){
-        String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_cloturer, Affichage.input_nom_client_cloturer);
-        Note note_client = clients.verification_client_existant(nom_client, true);
-        if(note_client!=null) { //le client existe bien
-            int index_note = clients.getIndexNote(nom_client);
-            boolean remise = Note.demander_remise();//on peut alors lui offrir une remise
-            clients.getNoteList().get(index_note).afficher_facture(remise);
-            clients.getNoteList().remove(clients.getNoteList().get(index_note)); }
+        clients.afficherListe();
+        if(clients.getNoteList().size()!=0){
+            String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_cloturer, Affichage.input_nom_client_cloturer);
+            Note note_client = clients.verification_client_existant(nom_client, true);
+            if(note_client!=null) {
+                int index_note = clients.getIndexNote(nom_client);
+                boolean remise = false;
+                if(clients.getNoteList().get(index_note).getProductList().size()!=0){ remise = Note.demander_remise(); }
+                clients.getNoteList().get(index_note).afficher_facture(remise);
+                clients.getNoteList().remove(clients.getNoteList().get(index_note)); } }
     }
 
 
     //Affichage des comptes (fin de journée)
     public void donnees_comptable(){
-        logger.info("OUTPUT", String.format("Total des rentrées d'argent: %s\n", df.format(total_argent)));
-        logger.info("OUTPUT", String.format("Total de la TVA facturée: %s\n", df.format(total_TVA)));
+        logger.info("OUTPUT", String.format("Total des rentrées d'argent: %s €\n", df.format(total_argent)));
+        logger.info("OUTPUT", String.format("Total de la TVA facturée: %s €\n", df.format(total_TVA)));
     }
 
 

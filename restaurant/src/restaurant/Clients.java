@@ -23,7 +23,7 @@ public class Clients {
             for (Note note : this.noteList) { //pour tous les éléments de la liste
                 logger.info("OUTPUT", "\t" + note.getNom() + "\n");
             }
-        }else{ logger.info("OUTPUT","Il n'y a aucun client dans le restaurant\n");}
+        }else{ logger.error("OUTPUT","Il n'y a aucun client dans le restaurant\n");}
     }
 
 

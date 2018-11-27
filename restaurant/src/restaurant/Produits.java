@@ -80,7 +80,7 @@ public class Produits {
     }
 
   
-    private int augmenter_stock(Aliment aliment){
+    public int augmenter_stock(Aliment aliment){
         int quantite = (int)Affichage.verification_nombre("entier", Affichage.output_quantite, Affichage.input_quantite);
         quantite += aliment.getQuantite();
         logger.info("INPUT","Nouvelle quantité :"+quantite+", de l'aliment :"+aliment.getNom() );

@@ -13,7 +13,7 @@ public class Caisse {
 
     //A l'arrivée des clients dans le restaurant, on ouvre une note
     public void ouvrir_note(Clients clients){
-        clients.afficherListe();//clients déjà présents
+        clients.afficherListe(false);//clients déjà présents
         String nom_client = Affichage.choix_chaine(Affichage.output_note_client_ouvrir, Affichage.input_note_client_ouvrir);
         Note note_client = clients.verification_client_existant(nom_client, false);
         if(note_client == null) {//s'il s'agit d'un nouvrau client, on lui crée une note
@@ -24,11 +24,12 @@ public class Caisse {
   
     //Lors d'une commande d'un client
     public void enregistrer(Clients clients, Produits produits){
-        clients.afficherListe();
+        clients.afficherListe(true);
         if(clients.getNoteList().size()!=0){
             String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_facturer, Affichage.input_nom_client_facturer);
             Note note_client = clients.verification_client_existant(nom_client, true);
             if(note_client != null) {
+                produits.afficherListe();
                 String nom_aliment = Affichage.choix_chaine(Affichage.output_nom_aliment_facturer, Affichage.input_nom_aliment_facturer);
                 Aliment aliment_demande = Produits.verification_aliment_existant(nom_aliment, true, produits.getProductList());
                 if(aliment_demande != null) {
@@ -40,7 +41,7 @@ public class Caisse {
 
     //Lorsqu'un client s'en va
     public void cloturer(Clients clients){
-        clients.afficherListe();
+        clients.afficherListe(true);
         if(clients.getNoteList().size()!=0){
             String nom_client = Affichage.choix_chaine(Affichage.output_nom_client_cloturer, Affichage.input_nom_client_cloturer);
             Note note_client = clients.verification_client_existant(nom_client, true);

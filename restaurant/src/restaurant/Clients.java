@@ -17,13 +17,13 @@ public class Clients {
 
 
     //Afficher la liste des notes de client
-    public void afficherListe() {
+    public void afficherListe(boolean message) {
         if (this.getNoteList().size() != 0) {//la liste n'est pas vide
             logger.info("OUTPUT", "Les clients actuellement dans le restaurant sont:\n");
             for (Note note : this.noteList) { //pour tous les éléments de la liste
                 logger.info("OUTPUT", "\t" + note.getNom() + "\n");
             }
-        }else{ logger.error("OUTPUT","Il n'y a aucun client dans le restaurant\n");}
+        }else if(message){ logger.error("OUTPUT","Il n'y a aucun client dans le restaurant\n");}
     }
 
 

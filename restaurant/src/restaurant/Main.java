@@ -21,7 +21,7 @@ class Main {
             case "a": produits.ajouter_produit(); break;
             case "p": produits.afficherListe(); break;
             case "n": caisse.ouvrir_note(clients); break;
-            case "k": clients.afficherListe(); break;
+            case "k": clients.afficherListe(true); break;
             case "e": caisse.enregistrer(clients, produits); break;
             case "f": caisse.cloturer(clients); break;
             case "c": caisse.donnees_comptable(); break;

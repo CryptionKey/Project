@@ -1,8 +1,11 @@
 # Programme de gestion d'un restaurant de Bagel
 
-## Cadre & Equipe:
-Ce projet a été réalisé dans le cadre d'un TP JAVA lors des études d'ingénieur à l'ESIEA en 3A par le binôme Axel DRAN et Daniel ELGRABLY
+## Cadre :
+Ce projet a été réalisé dans le cadre d'un TP JAVA lors des études d'ingénieur à l'ESIEA en 3A.
 
+## Equipe :
+Axel DRAN et Daniel ELGRABLY
+ 
 ## Lien des consignes :
 https://github.com/ledoyen/tp-java/tree/master/projet/3A_2018
 
